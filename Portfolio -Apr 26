@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Portfolio – Hari Naga Kumar</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F0F5FB;--bg2:#FFFFFF;--bg3:#E4EEF8;
+  --txt:#0F1F35;--txt2:#3A5068;--txt3:#7A95B0;
+  --accent:#1B6CA8;--accent2:#0D9488;--accent-light:#DCEEFB;
+  --border:#C8DBED;--radius:4px;--radius-lg:8px;
+  --shadow:0 1px 3px rgba(27,108,168,.07),0 4px 16px rgba(27,108,168,.05);
+  --shadow-md:0 2px 8px rgba(27,108,168,.1),0 8px 32px rgba(27,108,168,.07);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:0 var(--gutter);height:60px;display:flex;justify-content:space-between;align-items:center;background:rgba(240,245,251,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.logo{font-size:.85rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--txt)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--txt2);text-decoration:none;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;cursor:pointer}
+.nav-cta{cursor:pointer}
+.nav-links a:hover{color:var(--accent)}
+.nav-cta{background:var(--txt);color:#fff;padding:.5rem 1.25rem;border-radius:var(--radius);font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .15s}
+#hamburger{display:none}
+
+/* HERO */
+#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:6rem var(--gutter) 4rem;gap:4rem;max-width:1280px;margin:0 auto}
+.hero-eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
+.eyebrow-line{width:32px;height:1px;background:var(--accent)}
+.eyebrow-txt{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.hero-name{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:.75rem}
+.hero-role{font-size:1.1rem;font-weight:400;color:var(--txt2);margin-bottom:1.5rem;line-height:1.6}
+.hero-desc{font-size:.92rem;color:var(--txt3);line-height:1.8;max-width:440px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-dark{background:var(--txt);color:#fff;padding:.75rem 1.75rem;border-radius:var(--radius);font-size:.82rem;font-weight:600;letter-spacing:.04em;text-decoration:none;transition:background .2s,transform .15s}
+.btn-dark:hover{background:var(--accent);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--txt);padding:.75rem 1.75rem;border-radius:var(--radius);font-size:.82rem;font-weight:600;letter-spacing:.04em;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,transform .15s}
+.btn-ghost:hover{border-color:var(--txt);transform:translateY(-1px)}
+.hero-right{display:flex;flex-direction:column;gap:1rem}
+.hero-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow)}
+.hero-card-label{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-bottom:.4rem}
+.hero-card-val{font-size:1.6rem;font-weight:800;color:var(--txt);letter-spacing:-.02em}
+.hero-card-sub{font-size:.78rem;color:var(--txt2);margin-top:.2rem}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.hero-avail{background:var(--accent-light);border:1px solid #C3DDF5;border-radius:var(--radius-lg);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.75rem}
+.avail-dot{width:8px;height:8px;border-radius:50%;background:#16A34A;flex-shrink:0;box-shadow:0 0 0 3px #DCF5E4}
+.avail-txt{font-size:.82rem;font-weight:500;color:var(--accent)}
+
+/* SHARED */
+:root{--gutter:3rem}
+.section-wrap{padding:6rem var(--gutter);max-width:1280px;margin:0 auto}
+.section-wrap.full{max-width:100%;background:var(--bg2);padding:6rem var(--gutter)}
+.section-wrap.full .inner{max-width:calc(1280px - var(--gutter)*2);margin:0 auto}
+.section-eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.section-title{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;letter-spacing:-.02em;color:var(--txt);margin-bottom:3rem}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start}
+.about-img{aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;position:relative;cursor:pointer}
+.about-img img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
+.about-img-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;background:rgba(240,245,251,0.9);transition:opacity .2s}
+.about-img-overlay span{font-size:.75rem;font-weight:600;color:var(--accent)}
+.name-bar{font-size:.72rem;font-weight:600;letter-spacing:.08em;position:absolute;bottom:0;left:0;right:0;padding:.75rem;background:rgba(15,31,53,0.75);color:#fff;text-align:center;text-transform:uppercase;z-index:5}
+.about-body p{font-size:.95rem;color:var(--txt2);line-height:1.9;margin-bottom:1.25rem}
+.about-facts{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:2rem}
+.fact-item{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;display:flex;align-items:center;gap:.65rem}
+.fact-txt{font-size:.8rem;color:var(--txt2);font-weight:500}
+
+/* EXPERIENCE */
+.section-wrap.full#experience{background:var(--bg2)}
+.timeline{display:flex;flex-direction:column;position:relative}
+.exp-item{display:grid;grid-template-columns:200px 24px 1fr;padding-bottom:3.5rem;align-items:start}
+.exp-item:last-child{padding-bottom:0}
+.exp-meta{text-align:right;padding-right:1.25rem;padding-top:2px}
+.exp-period{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
+.exp-company{font-size:.82rem;color:var(--txt2);font-weight:500}
+.exp-stepper{display:flex;flex-direction:column;align-items:center;position:relative}
+.exp-dot{width:11px;height:11px;border-radius:50%;background:var(--bg2);border:2px solid var(--accent);flex-shrink:0;z-index:2;margin-top:3px}
+.exp-stepper::after{content:'';position:absolute;top:14px;left:50%;transform:translateX(-50%);width:2px;background:var(--border);bottom:-3.5rem;z-index:1}
+.exp-item:last-child .exp-stepper::after{display:none}
+.exp-card-clean{padding-left:1.5rem}
+.exp-role{font-size:1.05rem;font-weight:700;color:var(--txt);margin-bottom:.4rem}
+.exp-desc{font-size:.85rem;color:var(--txt2);line-height:1.75}
+
+/* EDUCATION */
+.edu-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.edu-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;transition:box-shadow .2s,transform .2s}
+.edu-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.edu-num{font-size:2.5rem;font-weight:800;color:var(--border);letter-spacing:-.04em;margin-bottom:.75rem}
+.edu-deg{font-size:.95rem;font-weight:700;color:var(--txt);margin-bottom:.3rem}
+.edu-inst{font-size:.83rem;font-weight:600;color:var(--accent);margin-bottom:.2rem}
+.edu-loc{font-size:.75rem;color:var(--txt3)}
+
+/* SKILLS */
+.skill-grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
+.skill-col{background:var(--bg2);padding:1.75rem 1.25rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s}
+.skill-col:hover{background:var(--bg3)}
+.skill-col-head{display:flex;flex-direction:column;gap:.6rem}
+.skill-ico-box{width:40px;height:40px;background:var(--accent-light);border-radius:var(--radius);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.skill-col-name{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);line-height:1.3}
+.skill-divider{width:24px;height:1.5px;background:var(--accent);opacity:.35;border-radius:1px}
+.skill-items{display:flex;flex-direction:column;gap:.35rem;list-style:none}
+.skill-items li{font-size:.75rem;color:var(--txt2);line-height:1.5;padding:.25rem 0;border-bottom:1px solid var(--border);cursor:default;transition:color .15s}
+.skill-items li:last-child{border-bottom:none}
+.skill-items li:hover{color:var(--accent)}
+@media(max-width:900px){.skill-grid-6{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:540px){.skill-grid-6{grid-template-columns:repeat(2,1fr)}}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow .25s,transform .25s;cursor:pointer}
+.proj-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.proj-thumb{height:180px;display:flex;align-items:center;justify-content:center;position:relative}
+.proj-thumb-label{position:absolute;bottom:.75rem;right:.75rem;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .7rem;border-radius:2px;background:rgba(255,255,255,0.9);color:var(--txt)}
+.proj-ico-wrap{display:flex;align-items:center;justify-content:center;width:64px;height:64px;background:rgba(255,255,255,0.75);border-radius:12px;border:1px solid rgba(27,108,168,.12)}
+.proj-body{padding:1.5rem;border-top:1px solid var(--border)}
+.proj-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem}
+.proj-tag{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;border-radius:2px;background:var(--bg3);color:var(--txt2)}
+.proj-name{font-size:.98rem;font-weight:700;color:var(--txt);margin-bottom:.4rem}
+.proj-desc{font-size:.8rem;color:var(--txt2);line-height:1.7}
+.proj-card{cursor:pointer}
+
+/* PROJECT MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(10,20,35,0.65);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s ease;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;width:100%;max-width:780px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(10,20,35,.22);transform:translateY(20px) scale(.98);transition:transform .3s ease;position:relative}
+.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
+.modal-hero{height:220px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12px 12px 0 0;overflow:hidden;flex-shrink:0}
+.modal-hero-ico{width:80px;height:80px;background:rgba(255,255,255,.8);border-radius:16px;border:1px solid rgba(27,108,168,.15);display:flex;align-items:center;justify-content:center}
+.modal-badge{position:absolute;top:1rem;left:1rem;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .75rem;border-radius:3px;background:rgba(255,255,255,.9);color:var(--txt)}
+.modal-close{position:absolute;top:1rem;right:1rem;width:34px;height:34px;background:rgba(255,255,255,.9);border:1px solid var(--border);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:10}
+.modal-close:hover{background:#fff}
+.modal-close svg{display:block}
+.modal-body{padding:2rem 2.5rem 2.5rem}
+.modal-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
+.modal-tag{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .65rem;border-radius:3px;background:var(--accent-light);color:var(--accent)}
+.modal-title{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;color:var(--txt);margin-bottom:.5rem}
+.modal-subtitle{font-size:.88rem;color:var(--txt2);line-height:1.75;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.modal-sections{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
+.modal-section-title{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem;display:flex;align-items:center;gap:.5rem}
+.modal-section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.modal-section-body{font-size:.82rem;color:var(--txt2);line-height:1.8}
+.modal-tools{grid-column:1/-1}
+.modal-tool-pills{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.1rem}
+.modal-tool-pill{font-size:.72rem;font-weight:500;padding:.3rem .8rem;border-radius:20px;background:var(--bg3);border:1px solid var(--border);color:var(--txt2)}
+.modal-metrics{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.modal-metric-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+.modal-metric-val{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;color:var(--accent);margin-bottom:.2rem}
+.modal-metric-lbl{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txt3)}
+.modal-process{grid-column:1/-1}
+.process-steps{display:flex;gap:0;margin-top:.5rem;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.process-step{flex:1;padding:.75rem .65rem;text-align:center;border-right:1px solid var(--border);position:relative}
+.process-step:last-child{border-right:none}
+.process-step-num{font-size:.6rem;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem}
+.process-step-name{font-size:.7rem;font-weight:600;color:var(--txt)}
+@media(max-width:600px){
+  .modal-sections{grid-template-columns:1fr}
+  .modal-metrics{grid-template-columns:1fr 1fr}
+  .modal-body{padding:1.5rem}
+  .process-steps{flex-wrap:wrap}
+  .process-step{border-bottom:1px solid var(--border)}
+}
+
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-left h2{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;letter-spacing:-.02em;margin-bottom:1rem}
+.contact-left p{font-size:.92rem;color:var(--txt2);line-height:1.8;margin-bottom:2rem}
+.contact-email{display:flex;align-items:center;gap:.5rem;font-size:.92rem;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:.2rem;width:fit-content;transition:opacity .2s}
+.contact-email:hover{opacity:.7}
+.socials{display:flex;gap:.75rem;margin-top:2rem;flex-wrap:wrap}
+.soc{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.5rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius);color:var(--txt2);text-decoration:none;transition:border-color .2s,color .2s}
+.soc:hover{border-color:var(--txt);color:var(--txt)}
+.contact-form{display:flex;flex-direction:column;gap:1.25rem}
+.field{display:flex;flex-direction:column;gap:.4rem}
+.field label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txt3)}
+.field input,.field textarea{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:.8rem 1rem;color:var(--txt);font-size:.88rem;font-family:inherit;outline:none;transition:border-color .2s}
+.field input:focus,.field textarea:focus{border-color:var(--accent)}
+.field textarea{resize:vertical;min-height:120px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-submit{background:var(--txt);color:#fff;padding:.8rem 2rem;border:none;border-radius:var(--radius);font-size:.82rem;font-weight:600;letter-spacing:.04em;cursor:pointer;align-self:flex-start;transition:background .2s,transform .15s}
+.btn-submit:hover{background:var(--accent);transform:translateY(-1px)}
+
+footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;max-width:1280px;margin:0 auto}
+.footer-txt{font-size:.75rem;color:var(--txt3);letter-spacing:.04em}
+
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;padding:5rem 2rem 3rem}
+  .about-grid{grid-template-columns:1fr}
+  .exp-item{grid-template-columns:1fr;gap:.5rem}
+  .exp-meta{text-align:left;padding-right:0;padding-left:2rem}
+  .edu-row,.proj-grid{grid-template-columns:1fr}
+  .contact-wrap{grid-template-columns:1fr}
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .section-wrap,.section-wrap.full{padding:4rem 1.5rem}
+  footer{padding:1.5rem;flex-direction:column;gap:.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">HNK</span>
+  <ul class="nav-links">
+    <li><a onclick="nav('about')">About</a></li>
+    <li><a onclick="nav('experience')">Experience</a></li>
+    <li><a onclick="nav('education')">Education</a></li>
+    <li><a onclick="nav('skills')">Skills</a></li>
+    <li><a onclick="nav('projects')">Projects</a></li>
+    <li><a onclick="nav('contact')">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <a class="nav-cta" onclick="nav('contact')">Hire me</a>
+    <div id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+<div id="mobile-menu">
+  <a onclick="nav('about');toggleMenu()">About</a>
+  <a onclick="nav('experience');toggleMenu()">Experience</a>
+  <a onclick="nav('education');toggleMenu()">Education</a>
+  <a onclick="nav('skills');toggleMenu()">Skills</a>
+  <a onclick="nav('projects');toggleMenu()">Projects</a>
+  <a onclick="nav('contact');toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Portfolio</span></div>
+    <div class="hero-name">Hari Naga<br>Kumar</div>
+    <div class="hero-role">Lead UI/UX Designer &amp; Visual Strategist</div>
+    <div class="hero-desc">Transforming complex problems into intuitive, scalable digital experiences across banking, healthcare, and AI SaaS platforms.</div>
+    <div class="hero-btns">
+      <a class="btn-dark" onclick="nav('projects')" style="cursor:pointer">View Work →</a>
+      <a class="btn-ghost" onclick="nav('contact')" style="cursor:pointer">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stats">
+      <div class="hero-card"><div class="hero-card-label">Experience</div><div class="hero-card-val">12+</div><div class="hero-card-sub">Years in design</div></div>
+      <div class="hero-card"><div class="hero-card-label">Companies</div><div class="hero-card-val">6</div><div class="hero-card-sub">Across industries</div></div>
+      <div class="hero-card"><div class="hero-card-label">Current Role</div><div class="hero-card-val" style="font-size:1rem;line-height:1.3">Lead UI/UX<br>Designer</div><div class="hero-card-sub">Bizacuity Solutions</div></div>
+      <div class="hero-card"><div class="hero-card-label">Domains</div><div class="hero-card-val" style="font-size:1rem;line-height:1.3">Banking,<br>Health, AI</div><div class="hero-card-sub">SaaS · Dashboards</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="section-wrap" id="about" style="scroll-margin-top:60px">
+  <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Who I am</span></div>
+  <div class="section-title">About me</div>
+  <div class="about-grid">
+    <div class="about-img" id="aboutImgBox">
+      <img src="profile.png" alt="Hari Naga Kumar" style="width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;inset:0;display:block;">
+      <div class="name-bar">Hari Naga Kumar</div>
+    </div>
+    <div class="about-body">
+      <p>I'm Hari Naga Kumar — a Lead UI/UX Designer with 12+ years of experience crafting intuitive, scalable digital products across startups and enterprises. I specialise in transforming complex problems into user-centric solutions through research, wireframing, prototyping, and data-driven dashboard design.</p>
+      <p>Experienced in Agile environments, I leverage UCD/HCD principles and tools like Jira to deliver impactful outcomes. Recently, I've been integrating AI-powered design workflows using Figma, Google Stitch, and Claude, while expanding into front-end development with Microsoft Visual Studio and GitHub Copilot.</p>
+      <p>Passionate about building meaningful, user-focused experiences and continuously evolving with design and technology.</p>
+      <div class="about-facts" id="aboutFacts"></div>
+    </div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section-wrap full" id="experience" style="scroll-margin-top:60px">
+  <div class="inner">
+    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Career</span></div>
+    <div class="section-title">Work experience</div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<div class="section-wrap" id="education" style="scroll-margin-top:60px">
+  <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Academic background</span></div>
+  <div class="section-title">Education</div>
+  <div class="edu-row" id="eduGrid"></div>
+</div>
+
+<!-- SKILLS -->
+<div class="section-wrap full" id="skills" style="scroll-margin-top:60px">
+  <div class="inner">
+    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">What I do</span></div>
+    <div class="section-title">Skills &amp; tools</div>
+    <div class="skill-grid-6" id="skillGrid"></div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div class="section-wrap" id="projects" style="scroll-margin-top:60px">
+  <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Selected work</span></div>
+  <div class="section-title">Projects</div>
+  <div class="proj-grid" id="projGrid"></div>
+</div>
+
+<!-- CONTACT -->
+<div class="section-wrap full" id="contact" style="scroll-margin-top:60px">
+  <div class="inner">
+    <div class="contact-wrap">
+      <div class="contact-left">
+        <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Say hello</span></div>
+        <h2>Let's work<br>together</h2>
+        <p>Have a project in mind or just want to talk design? I'm always open to new conversations.</p>
+        <a href="mailto:harinag12@gmail.com" class="contact-email">harinag12@gmail.com</a>
+        <div class="socials">
+          <a href="#" class="soc">Dribbble</a>
+          <a href="#" class="soc">Behance</a>
+          <a href="#" class="soc">LinkedIn</a>
+          <a href="#" class="soc">Instagram</a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-row">
+          <div class="field"><label>Name</label><input type="text" placeholder="Your name"></div>
+          <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"></div>
+        </div>
+        <div class="field"><label>Subject</label><input type="text" placeholder="Project type or idea"></div>
+        <div class="field"><label>Message</label><textarea placeholder="Tell me about your project..."></textarea></div>
+        <button class="btn-submit" onclick="this.textContent='Sent ✓';this.style.background='#0D9488'">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="footer-txt">© 2026 Hari Naga Kumar</span>
+  <span class="footer-txt">Designed with intention · Built with care</span>
+</footer>
+
+<!-- PROJECT DETAIL MODAL -->
+<div class="modal-overlay" id="projModal" onclick="closeModal(event)">
+  <div class="modal-box" id="projModalBox">
+    <button class="modal-close" onclick="closeModal(null,true)" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F1F35" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal-hero" id="mHero">
+      <span class="modal-badge">Case Study</span>
+      <div class="modal-hero-ico" id="mIco"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tags" id="mTags"></div>
+      <div class="modal-title" id="mTitle"></div>
+      <div class="modal-subtitle" id="mSub"></div>
+      <div class="modal-sections" id="mSections"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  /* ── SVG ICONS ────────────────────────────────────────── */
+  function ico(path, s){ s=s||20; return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="#1B6CA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">'+path+'</svg>'; }
+  var ICON = {
+    brush:  ico('<path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1 1 2.18 1 3.5 1 2.77 0 5.02-2.25 5.02-5.02s-1.54-1.02-3.52-1.02z"/>'),
+    search: ico('<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>'),
+    tool:   ico('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'),
+    code:   ico('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'),
+    chart:  ico('<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>'),
+    users:  ico('<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'),
+    pin:    ico('<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>', 15),
+    brief:  ico('<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>', 15),
+    grad:   ico('<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>', 15),
+    zap:    ico('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>', 15),
+  };
+
+  /* ── HAMBURGER ────────────────────────────────────────── */
+  window.toggleMenu = function(){
+    var m = document.getElementById('mobile-menu');
+    var h = document.getElementById('hamburger');
+    var open = m.classList.toggle('open');
+    h.style.opacity = open ? '.6' : '1';
+  };
+
+  /* ── SMOOTH NAV ───────────────────────────────────────── */
+  window.nav = function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - 60;
+    window.scrollTo({top: top, behavior: 'smooth'});
+  };
+
+
+
+  /* ── ABOUT FACTS ──────────────────────────────────────── */
+  var facts = [
+    {icon:'pin',  txt:'Hyderabad, India'},
+    {icon:'brief',txt:'Bizacuity Solutions'},
+    {icon:'grad', txt:'BFA · Osmania University'},
+    {icon:'zap',  txt:'UCD / HCD · Agile'},
+  ];
+  var factsEl = document.getElementById('aboutFacts');
+  facts.forEach(function(f){
+    factsEl.innerHTML += '<div class="fact-item">'+ICON[f.icon]+'<span class="fact-txt">'+f.txt+'</span></div>';
+  });
+
+  /* ── EXPERIENCE ───────────────────────────────────────── */
+  var expData = [
+    {role:'Lead UI UX Designer', company:'Bizacuity Solutions Pvt Ltd', loc:'Hyderabad', period:'Sep 2023 – Present', desc:'Proven track record in banking, healthcare, and AI SaaS platforms, focused on usability and performance.'},
+    {role:'Lead UX Engineer',    company:'Gramener',                    loc:'Hyderabad', period:'Jun 2016 – Sep 2023', desc:'Specialising in data visualisation and dashboard design for finance, healthcare, and media platforms. (7 years)'},
+    {role:'UI Designer',         company:'Sai Sri Technologies',        loc:'Hyderabad', period:'Sep 2014 – Jun 2016', desc:'Designed and delivered visual content across e-learning, product illustration, branding, and web design.'},
+    {role:'Graphic Designer & Animator', company:'LOGICPROG Technologies', loc:'Hyderabad', period:'Aug 2013 – Aug 2014', desc:'Developed graphics, animations and visual images for product illustrations, logos, and websites.'},
+    {role:'Graphic Designer & Animator', company:'Caliber IT Solutions',   loc:'Hyderabad', period:'Jan 2010 – Aug 2013', desc:'Developed graphics and visual images for product illustrations, logos, and websites.'},
+    {role:'Graphic Designer',    company:'Rush Softech Pvt Ltd',        loc:'Hyderabad', period:'Jun 2009 – Dec 2009', desc:'Developed graphics and visual images for product illustrations, logos, and websites. (formerly BNR IT Solutions)'},
+  ];
+  var tlEl = document.getElementById('timeline');
+  expData.forEach(function(e){
+    tlEl.innerHTML += '<div class="exp-item">'
+      +'<div class="exp-meta"><div class="exp-period">'+e.period+'</div><div class="exp-company">'+e.company+' · '+e.loc+'</div></div>'
+      +'<div class="exp-stepper"><div class="exp-dot"></div></div>'
+      +'<div class="exp-card-clean">'
+      +'<div class="exp-role">'+e.role+'</div>'
+      +'<div class="exp-company-mob" style="font-size:.82rem;color:var(--accent);font-weight:600;margin-bottom:.35rem">'+e.company+'</div>'
+      +'<div class="exp-desc">'+e.desc+'</div>'
+      +'</div>'
+      +'</div>';
+  });
+
+  /* ── EDUCATION ────────────────────────────────────────── */
+  var eduData = [
+    {num:'01', degree:'Bachelor of Fine Arts (BFA)',      inst:'Osmania University', loc:'Hyderabad'},
+    {num:'02', degree:'Diploma in Computer Engineering',  inst:'Andhra University',  loc:'Andhra Pradesh'},
+    {num:'03', degree:'Intermediate',                     inst:'Govt. Jr. College',  loc:'Razole'},
+  ];
+  var eduEl = document.getElementById('eduGrid');
+  eduData.forEach(function(e){
+    eduEl.innerHTML += '<div class="edu-card">'
+      +'<div class="edu-num">'+e.num+'</div>'
+      +'<div class="edu-deg">'+e.degree+'</div>'
+      +'<div class="edu-inst">'+e.inst+'</div>'
+      +'<div class="edu-loc">'+e.loc+'</div>'
+      +'</div>';
+  });
+
+  /* ── SKILLS ───────────────────────────────────────────── */
+  var skillData = [
+    {icon:'brush', cat:'UI Design',    skills:['Visual Design','Color Theory','Typography','Design Systems','Component Libraries','Responsive Design','Adaptive Design','Data Viz Design','Micro-interactions','Animation']},
+    {icon:'search',cat:'Core UX',     skills:['User Research','Interviews & Surveys','User Personas','Journey Mapping','Info Architecture','Wireframing','Prototyping','Interaction Design','Design Thinking']},
+    {icon:'tool',  cat:'Tools',        skills:['Figma','Figma Make','Google Stitch','Sketch','Adobe Photoshop','Adobe Illustrator','Adobe XD','Visual Studio','GitHub Copilot','Claude AI']},
+    {icon:'code',  cat:'Technical',    skills:['HTML & CSS','Responsive Frameworks','Front-end Feasibility','SaaS Workflows']},
+    {icon:'chart', cat:'Analytical',   skills:['Data-driven Design','KPI-driven UX','A/B Testing','Product Lifecycle']},
+    {icon:'users', cat:'Soft Skills',  skills:['Stakeholder Collab','Storytelling','Attention to Detail','Project Management']},
+  ];
+  var skillEl = document.getElementById('skillGrid');
+  skillData.forEach(function(c){
+    var items = c.skills.map(function(s){ return '<li>'+s+'</li>'; }).join('');
+    skillEl.innerHTML += '<div class="skill-col">'
+      +'<div class="skill-col-head">'
+      +'<div class="skill-ico-box">'+ICON[c.icon]+'</div>'
+      +'<div class="skill-col-name">'+c.cat+'</div>'
+      +'<div class="skill-divider"></div>'
+      +'</div>'
+      +'<ul class="skill-items">'+items+'</ul>'
+      +'</div>';
+  });
+
+  /* ── PROJECTS ─────────────────────────────────────────── */
+  var projIcons = ['chart','search','tool','brush','code','users'];
+  var projects = [
+    {
+      name:'FinFlow Dashboard',
+      desc:'Accessible banking dashboard redesign reducing task completion time by 38%.',
+      tags:['UX','Figma','Banking'],
+      bg:'#DCEEFB',
+      subtitle:'A comprehensive redesign of a legacy banking dashboard for a mid-sized financial institution, focusing on accessibility, cognitive load reduction, and task efficiency for daily banking operations staff.',
+      problem:'The existing dashboard had a 14-step average task flow for common operations, WCAG AA accessibility failures, and a 62% user-reported confusion rate in usability testing — causing measurable losses in operational throughput.',
+      solution:'Restructured the information architecture around job-to-be-done flows rather than system modules. Introduced a progressive disclosure model, unified component library, and an accessible colour system meeting WCAG AA across all contrast ratios.',
+      outcome:'Task completion time dropped 38%. Error rate fell by 51%. User satisfaction scores rose from 3.1 to 4.6 / 5 in post-launch surveys. Accessibility audit score improved from 61 to 97.',
+      tools:['Figma','FigJam','Axure RP','Maze (usability testing)','Jira','Zeroheight (design system docs)'],
+      process:['Discovery','Research','IA & Flows','Wireframes','Prototype','Test & Iterate'],
+      metrics:[{val:'38%',lbl:'Faster task completion'},{val:'51%',lbl:'Error rate reduction'},{val:'4.6/5',lbl:'User satisfaction'}],
+    },
+    {
+      name:'HealthOS Platform',
+      desc:'End-to-end UX for a healthcare SaaS — complex workflows simplified for clinical users.',
+      tags:['Healthcare','SaaS','Research'],
+      bg:'#D8F0EC',
+      subtitle:'End-to-end UX design for a healthcare SaaS serving clinical administrators, nurses, and doctors — transforming dense, regulation-heavy workflows into clear, role-specific interfaces that reduce cognitive load during high-stakes scenarios.',
+      problem:'Clinical staff were toggling between 5+ legacy systems for a single patient workflow. The cognitive overload contributed to data entry errors and regulatory compliance risks. The product needed a unified platform with clearly delineated role access.',
+      solution:'Conducted 18 contextual interviews across 3 hospitals. Defined distinct user personas (doctor, nurse, admin). Designed a modular role-based dashboard with contextual prompts, inline help, and a streamlined patient-record workflow reducing the average touchpoints from 22 to 8.',
+      outcome:'Onboarding time for new clinical staff reduced by 44%. Data entry errors fell by 33% in a 3-month pilot. The platform received clearance in regulatory audit with zero UX-related compliance flags.',
+      tools:['Figma','Miro','Dovetail (research synthesis)','Principle (micro-interactions)','Zeplin','Adobe Illustrator'],
+      process:['Contextual Inquiry','Persona Mapping','Journey Map','System Design','Prototype','Pilot & Refine'],
+      metrics:[{val:'44%',lbl:'Faster staff onboarding'},{val:'33%',lbl:'Fewer data entry errors'},{val:'22→8',lbl:'Workflow touchpoints'}],
+    },
+    {
+      name:'DataScope Analytics',
+      desc:'Data visualisation dashboard for media & finance — built at Gramener.',
+      tags:['Data Viz','Dashboard','Finance'],
+      bg:'#E8E4F8',
+      subtitle:'A real-time data visualisation platform for media intelligence and financial performance monitoring — designed for analysts and C-suite stakeholders who need to make fast decisions from complex, multi-source data streams.',
+      problem:'Analyst teams were spending 3–4 hours daily manually compiling data from disparate sources into PowerPoint reports. Stakeholders lacked live visibility into KPIs, and the existing BI tool was too complex for non-technical executives.',
+      solution:'Designed a two-layer dashboard: a high-level executive view with key KPIs, trend indicators, and anomaly flags; and a deep-dive analyst layer with filterable charts, drill-down tables, and export tools. Used Gramener\'s Gramex framework and D3.js-backed components.',
+      outcome:'Report compilation time reduced from 3–4 hours to under 10 minutes. Executive adoption reached 87% within 6 weeks of launch. Platform shortlisted for a data visualisation industry award.',
+      tools:['Figma','D3.js (design spec)','Tableau (reference)','Adobe Illustrator','Gramex','Excel (data modelling)'],
+      process:['Stakeholder Workshops','KPI Mapping','Chart Taxonomy','Layout Design','Prototype','QA & Launch'],
+      metrics:[{val:'95%',lbl:'Report time saved'},{val:'87%',lbl:'Executive adoption'},{val:'6 wks',lbl:'To full deployment'}],
+    },
+    {
+      name:'AI SaaS Interface',
+      desc:'Clean, intuitive UI for an AI platform — focused on usability and performance.',
+      tags:['AI','Product','UX'],
+      bg:'#DCEEFB',
+      subtitle:'UI/UX design for an AI-powered SaaS product at Bizacuity Solutions — a platform where non-technical users configure, run, and monitor AI pipelines. The challenge: making complex AI behaviour feel approachable and controllable.',
+      problem:'Early user testing showed that non-technical users found the AI configuration screens intimidating, with abstract terminology and a lack of real-time feedback causing abandonment. Technical users, conversely, needed deeper control without extra clicks.',
+      solution:'Introduced a "simple vs advanced" mode toggle on AI config screens. Rewrote all microcopy and labels in plain language. Built a live preview panel so users could see the effect of settings in real time. Designed a status system with clear progress states, confidence indicators, and plain-language error messages.',
+      outcome:'Feature adoption among non-technical users increased by 60%. Support tickets related to AI configuration dropped by 42%. Time-to-first-successful-run reduced from 18 minutes to 6 minutes.',
+      tools:['Figma','Figma Make','Claude AI (design ideation)','GitHub Copilot','Visual Studio Code','Lottie (animations)'],
+      process:['User Interviews','Mental Model Mapping','Content Strategy','UI Design','Prototype','A/B Testing'],
+      metrics:[{val:'60%',lbl:'Feature adoption up'},{val:'42%',lbl:'Fewer support tickets'},{val:'18→6 min',lbl:'Time to first success'}],
+    },
+    {
+      name:'E-learning Portal',
+      desc:'Visual content and UX for an e-learning platform — delivered at Sai Sri Technologies.',
+      tags:['E-learning','Branding','Illustration'],
+      bg:'#FDF5E0',
+      subtitle:'End-to-end visual design and UX for a corporate e-learning platform serving 12,000+ employees at a large enterprise client — covering course interface design, illustration systems, motion graphics, and brand identity for the learning product.',
+      problem:'The client\'s existing e-learning content used stock photography and off-the-shelf templates, resulting in low learner engagement (avg. 34% course completion). The brand felt disconnected from the company\'s identity, reducing perceived credibility.',
+      solution:'Developed a bespoke illustration library of 200+ scenes tailored to the client\'s industry. Designed a consistent course UI with clear progress mechanics, chunked content cards, and animated transitions. Rebuilt the visual brand system for the learning platform from scratch.',
+      outcome:'Course completion rate rose from 34% to 71% across the first 3 cohorts. Learner satisfaction scores averaged 4.4 / 5. The illustration library was reused across 40+ courses, reducing production time per course by 55%.',
+      tools:['Adobe Illustrator','Adobe Photoshop','Adobe After Effects','Articulate Storyline','Figma','Adobe XD'],
+      process:['Brand Audit','Illustration System','UI Patterns','Motion Design','Authoring','QA & Publish'],
+      metrics:[{val:'71%',lbl:'Course completion rate'},{val:'55%',lbl:'Production time saved'},{val:'4.4/5',lbl:'Learner satisfaction'}],
+    },
+    {
+      name:'Brand & Motion Work',
+      desc:'Logos, animations, and visual identities across LOGICPROG and Caliber IT.',
+      tags:['Branding','Animation','Identity'],
+      bg:'#FDEAEA',
+      subtitle:'A portfolio of brand identity and motion design work spanning 4+ years across LOGICPROG Technologies and Caliber IT Solutions — covering logo design, brand guidelines, animated explainers, UI illustrations, and product marketing visuals.',
+      problem:'Both companies were growing rapidly but lacked cohesive brand identities. Marketing materials were inconsistent across channels, and product illustrations relied on generic clip-art — undermining professional credibility with enterprise clients.',
+      solution:'Designed complete brand identity systems for both companies including logo, colour palette, typography, icon libraries, and usage guidelines. Produced 30+ animated explainer sequences in After Effects. Created modular illustration systems reused across web, presentations, and print.',
+      outcome:'Both companies reported increased win rates in enterprise pitches. LOGICPROG\'s rebrand was credited in winning a $400k contract. Caliber IT reduced external design agency spend by 70% using internal brand assets.',
+      tools:['Adobe Illustrator','Adobe After Effects','Adobe Photoshop','Adobe InDesign','Figma','Cinema 4D (basic)'],
+      process:['Brand Discovery','Concept Sketches','Logo Design','System Design','Motion Design','Brand Rollout'],
+      metrics:[{val:'30+',lbl:'Animation sequences'},{val:'70%',lbl:'Agency spend saved'},{val:'2',lbl:'Full brand systems built'}],
+    },
+  ];
+  var projEl = document.getElementById('projGrid');
+  projects.forEach(function(p, i){
+    var tags = p.tags.map(function(t){ return '<span class="proj-tag">'+t+'</span>'; }).join('');
+    var card = document.createElement('div');
+    card.className = 'proj-card';
+    card.innerHTML = '<div class="proj-thumb" style="background:'+p.bg+'">'
+      +'<div class="proj-ico-wrap">'+ICON[projIcons[i]].replace('width="20" height="20"','width="28" height="28"')+'</div>'
+      +'<span class="proj-thumb-label">Case Study</span>'
+      +'</div>'
+      +'<div class="proj-body">'
+      +'<div class="proj-tags">'+tags+'</div>'
+      +'<div class="proj-name">'+p.name+'</div>'
+      +'<p class="proj-desc">'+p.desc+'</p>'
+      +'<div style="margin-top:.9rem;font-size:.72rem;font-weight:600;color:var(--accent);letter-spacing:.04em;display:flex;align-items:center;gap:.3rem">View case study <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>'
+      +'</div>';
+    card.addEventListener('click', function(){ openModal(i); });
+    projEl.appendChild(card);
+  });
+
+  /* ── MODAL ────────────────────────────────────────────── */
+  window.openModal = function(i){
+    var p = projects[i];
+    var overlay = document.getElementById('projModal');
+    document.getElementById('mHero').style.background = p.bg;
+    document.getElementById('mIco').innerHTML = ICON[projIcons[i]].replace('width="20" height="20"','width="36" height="36"');
+    document.getElementById('mTags').innerHTML = p.tags.map(function(t){ return '<span class="modal-tag">'+t+'</span>'; }).join('');
+    document.getElementById('mTitle').textContent = p.name;
+    document.getElementById('mSub').textContent = p.subtitle;
+
+    var metrics = p.metrics.map(function(m){
+      return '<div class="modal-metric-card"><div class="modal-metric-val">'+m.val+'</div><div class="modal-metric-lbl">'+m.lbl+'</div></div>';
+    }).join('');
+    var processSteps = p.process.map(function(s, idx){
+      return '<div class="process-step"><div class="process-step-num">0'+(idx+1)+'</div><div class="process-step-name">'+s+'</div></div>';
+    }).join('');
+    var tools = p.tools.map(function(t){ return '<span class="modal-tool-pill">'+t+'</span>'; }).join('');
+
+    document.getElementById('mSections').innerHTML =
+      '<div class="modal-metrics">'+metrics+'</div>'
+      +'<div>'
+        +'<div class="modal-section-title">The Problem</div>'
+        +'<div class="modal-section-body">'+p.problem+'</div>'
+      +'</div>'
+      +'<div>'
+        +'<div class="modal-section-title">The Solution</div>'
+        +'<div class="modal-section-body">'+p.solution+'</div>'
+      +'</div>'
+      +'<div class="modal-process">'
+        +'<div class="modal-section-title">Design Process</div>'
+        +'<div class="process-steps">'+processSteps+'</div>'
+      +'</div>'
+      +'<div class="modal-tools">'
+        +'<div class="modal-section-title">Tools & Methods</div>'
+        +'<div class="modal-tool-pills">'+tools+'</div>'
+      +'</div>'
+      +'<div style="grid-column:1/-1">'
+        +'<div class="modal-section-title">Outcomes</div>'
+        +'<div class="modal-section-body">'+p.outcome+'</div>'
+      +'</div>';
+
+    document.getElementById('projModalBox').scrollTop = 0;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeModal = function(e, force){
+    if(force || (e && e.target === document.getElementById('projModal'))){
+      document.getElementById('projModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  };
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') closeModal(null, true);
+  });
+
+})();
+</script>
+</body>
+</html>
