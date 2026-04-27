@@ -126,9 +126,9 @@ nav{position:fixed;top:0;width:100%;z-index:100;padding:0 var(--gutter);height:6
 .proj-card{cursor:pointer}
 
 /* PROJECT MODAL */
-.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(10,20,35,0.65);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s ease;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(10,20,35,0.65);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s ease;display:flex;align-items:center;justify-content:center;padding:1rem 2rem}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;width:100%;max-width:780px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(10,20,35,.22);transform:translateY(20px) scale(.98);transition:transform .3s ease;position:relative}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;width:100%;max-width:1080px;max-height:92vh;overflow-y:auto;box-shadow:0 24px 80px rgba(10,20,35,.22);transform:translateY(20px) scale(.98);transition:transform .3s ease;position:relative}
 .modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
 .modal-hero{height:220px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12px 12px 0 0;overflow:hidden;flex-shrink:0}
 .modal-hero-ico{width:80px;height:80px;background:rgba(255,255,255,.8);border-radius:16px;border:1px solid rgba(27,108,168,.15);display:flex;align-items:center;justify-content:center}
@@ -158,12 +158,25 @@ nav{position:fixed;top:0;width:100%;z-index:100;padding:0 var(--gutter);height:6
 .process-step:last-child{border-right:none}
 .process-step-num{font-size:.6rem;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem}
 .process-step-name{font-size:.7rem;font-weight:600;color:var(--txt)}
+/* IMAGE CASE STUDY MODE */
+.modal-box.img-mode .modal-hero{display:none}
+.modal-img-wrap{width:100%;padding:0}
+.modal-img-wrap img{width:100%;display:block;border-radius:0 0 12px 12px}
+.modal-img-header{padding:1.5rem 2rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg2);z-index:5;border-radius:12px 12px 0 0}
+.modal-img-meta{display:flex;flex-direction:column;gap:.25rem}
+.modal-img-title{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:var(--txt)}
+.modal-img-sub{font-size:.75rem;color:var(--txt3);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.modal-img-tags{display:flex;gap:.35rem;flex-wrap:wrap}
+.modal-img-zoom{display:flex;align-items:center;gap:.5rem}
+.modal-zoom-btn{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.4rem .7rem;cursor:pointer;font-size:.75rem;font-weight:600;color:var(--txt2);transition:background .15s;line-height:1}
+.modal-zoom-btn:hover{background:var(--accent-light);color:var(--accent)}
 @media(max-width:600px){
   .modal-sections{grid-template-columns:1fr}
   .modal-metrics{grid-template-columns:1fr 1fr}
   .modal-body{padding:1.5rem}
   .process-steps{flex-wrap:wrap}
   .process-step{border-bottom:1px solid var(--border)}
+  .modal-img-header{flex-direction:column;align-items:flex-start;gap:.75rem}
 }
 
 /* CONTACT */
@@ -479,6 +492,7 @@ footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify
     },
     {
       name:'HealthOS Platform',
+      caseStudyImage:'images/healthos-case-study.png',
       desc:'End-to-end UX for a healthcare SaaS — complex workflows simplified for clinical users.',
       tags:['Healthcare','SaaS','Research'],
       bg:'#D8F0EC',
@@ -563,49 +577,85 @@ footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify
   });
 
   /* ── MODAL ────────────────────────────────────────────── */
+  var imgZoom = 1;
+
   window.openModal = function(i){
     var p = projects[i];
     var overlay = document.getElementById('projModal');
-    document.getElementById('mHero').style.background = p.bg;
-    document.getElementById('mIco').innerHTML = ICON[projIcons[i]].replace('width="20" height="20"','width="36" height="36"');
-    document.getElementById('mTags').innerHTML = p.tags.map(function(t){ return '<span class="modal-tag">'+t+'</span>'; }).join('');
-    document.getElementById('mTitle').textContent = p.name;
-    document.getElementById('mSub').textContent = p.subtitle;
+    var box = document.getElementById('projModalBox');
+    box.scrollTop = 0;
+    imgZoom = 1;
 
-    var metrics = p.metrics.map(function(m){
-      return '<div class="modal-metric-card"><div class="modal-metric-val">'+m.val+'</div><div class="modal-metric-lbl">'+m.lbl+'</div></div>';
-    }).join('');
-    var processSteps = p.process.map(function(s, idx){
-      return '<div class="process-step"><div class="process-step-num">0'+(idx+1)+'</div><div class="process-step-name">'+s+'</div></div>';
-    }).join('');
-    var tools = p.tools.map(function(t){ return '<span class="modal-tool-pill">'+t+'</span>'; }).join('');
+    if(p.caseStudyImage){
+      /* ── IMAGE MODE ── */
+      box.classList.add('img-mode');
+      var tags = p.tags.map(function(t){ return '<span class="modal-tag">'+t+'</span>'; }).join('');
+      box.innerHTML =
+        '<button class="modal-close" onclick="closeModal(null,true)" aria-label="Close">'
+          +'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F1F35" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        +'</button>'
+        +'<div class="modal-img-header">'
+          +'<div class="modal-img-meta">'
+            +'<div class="modal-img-title">'+p.name+'</div>'
+            +'<div class="modal-img-sub">Case Study</div>'
+          +'</div>'
+          +'<div style="display:flex;align-items:center;gap:.75rem">'
+            +'<div class="modal-img-tags">'+tags+'</div>'
+            +'<div class="modal-img-zoom">'
+              +'<button class="modal-zoom-btn" onclick="adjustZoom(-0.2)">−</button>'
+              +'<span id="zoomLbl" style="font-size:.72rem;font-weight:600;color:var(--txt3);min-width:2.5rem;text-align:center">100%</span>'
+              +'<button class="modal-zoom-btn" onclick="adjustZoom(0.2)">+</button>'
+            +'</div>'
+          +'</div>'
+        +'</div>'
+        +'<div class="modal-img-wrap" id="imgWrap">'
+          +'<img id="caseImg" src="'+p.caseStudyImage+'" alt="'+p.name+' case study" style="transform-origin:top center;transition:transform .2s">'
+        +'</div>';
+    } else {
+      /* ── TEXT MODE ── */
+      box.classList.remove('img-mode');
+      box.innerHTML =
+        '<button class="modal-close" onclick="closeModal(null,true)" aria-label="Close">'
+          +'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F1F35" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
+        +'</button>'
+        +'<div class="modal-hero" id="mHero" style="background:'+p.bg+'">'
+          +'<span class="modal-badge">Case Study</span>'
+          +'<div class="modal-hero-ico">'+ICON[projIcons[i]].replace('width="20" height="20"','width="36" height="36"')+'</div>'
+        +'</div>'
+        +'<div class="modal-body">'
+          +'<div class="modal-tags">'+p.tags.map(function(t){ return '<span class="modal-tag">'+t+'</span>'; }).join('')+'</div>'
+          +'<div class="modal-title">'+p.name+'</div>'
+          +'<div class="modal-subtitle">'+p.subtitle+'</div>'
+          +'<div class="modal-sections" id="mSections"></div>'
+        +'</div>';
 
-    document.getElementById('mSections').innerHTML =
-      '<div class="modal-metrics">'+metrics+'</div>'
-      +'<div>'
-        +'<div class="modal-section-title">The Problem</div>'
-        +'<div class="modal-section-body">'+p.problem+'</div>'
-      +'</div>'
-      +'<div>'
-        +'<div class="modal-section-title">The Solution</div>'
-        +'<div class="modal-section-body">'+p.solution+'</div>'
-      +'</div>'
-      +'<div class="modal-process">'
-        +'<div class="modal-section-title">Design Process</div>'
-        +'<div class="process-steps">'+processSteps+'</div>'
-      +'</div>'
-      +'<div class="modal-tools">'
-        +'<div class="modal-section-title">Tools & Methods</div>'
-        +'<div class="modal-tool-pills">'+tools+'</div>'
-      +'</div>'
-      +'<div style="grid-column:1/-1">'
-        +'<div class="modal-section-title">Outcomes</div>'
-        +'<div class="modal-section-body">'+p.outcome+'</div>'
-      +'</div>';
+      var metrics = p.metrics.map(function(m){
+        return '<div class="modal-metric-card"><div class="modal-metric-val">'+m.val+'</div><div class="modal-metric-lbl">'+m.lbl+'</div></div>';
+      }).join('');
+      var processSteps = p.process.map(function(s, idx){
+        return '<div class="process-step"><div class="process-step-num">0'+(idx+1)+'</div><div class="process-step-name">'+s+'</div></div>';
+      }).join('');
+      var tools = p.tools.map(function(t){ return '<span class="modal-tool-pill">'+t+'</span>'; }).join('');
 
-    document.getElementById('projModalBox').scrollTop = 0;
+      document.getElementById('mSections').innerHTML =
+        '<div class="modal-metrics">'+metrics+'</div>'
+        +'<div><div class="modal-section-title">The Problem</div><div class="modal-section-body">'+p.problem+'</div></div>'
+        +'<div><div class="modal-section-title">The Solution</div><div class="modal-section-body">'+p.solution+'</div></div>'
+        +'<div class="modal-process"><div class="modal-section-title">Design Process</div><div class="process-steps">'+processSteps+'</div></div>'
+        +'<div class="modal-tools"><div class="modal-section-title">Tools & Methods</div><div class="modal-tool-pills">'+tools+'</div></div>'
+        +'<div style="grid-column:1/-1"><div class="modal-section-title">Outcomes</div><div class="modal-section-body">'+p.outcome+'</div></div>';
+    }
+
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+  };
+
+  window.adjustZoom = function(delta){
+    imgZoom = Math.min(2, Math.max(0.4, imgZoom + delta));
+    var img = document.getElementById('caseImg');
+    var lbl = document.getElementById('zoomLbl');
+    if(img) img.style.transform = 'scale('+imgZoom+')';
+    if(lbl) lbl.textContent = Math.round(imgZoom*100)+'%';
   };
 
   window.closeModal = function(e, force){
