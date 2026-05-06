@@ -2,677 +2,654 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Portfolio – Hari Naga Kumar</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hari Naga Kumar — Lead UI/UX Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#F0F5FB;--bg2:#FFFFFF;--bg3:#E4EEF8;
-  --txt:#0F1F35;--txt2:#3A5068;--txt3:#7A95B0;
-  --accent:#1B6CA8;--accent2:#0D9488;--accent-light:#DCEEFB;
-  --border:#C8DBED;--radius:4px;--radius-lg:8px;
-  --shadow:0 1px 3px rgba(27,108,168,.07),0 4px 16px rgba(27,108,168,.05);
-  --shadow-md:0 2px 8px rgba(27,108,168,.1),0 8px 32px rgba(27,108,168,.07);
+  --black:#0A0A0A;--white:#F5F5F0;--grey:#1A1A1A;--grey2:#222;--grey3:#2E2E2E;
+  --muted:#666;--muted2:#999;--accent:#E8FF4A;--accent2:#FF5C35;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.13);
 }
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth;cursor:none}
+body{background:var(--black);color:var(--white);font-family:"DM Sans",sans-serif;font-size:15px;line-height:1.6;overflow-x:hidden}
 
-/* NAV */
-nav{position:fixed;top:0;width:100%;z-index:100;padding:0 var(--gutter);height:60px;display:flex;justify-content:space-between;align-items:center;background:rgba(240,245,251,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
-.logo{font-size:.85rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--txt)}
+/* ── CURSOR ──────────────────────────────────── */
+.cursor{position:fixed;width:9px;height:9px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;mix-blend-mode:difference}
+.cursor-ring{position:fixed;width:38px;height:38px;border:1px solid rgba(232,255,74,.3);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .25s,height .25s}
+.cursor.hov{width:5px;height:5px}
+.cursor-ring.hov{width:56px;height:56px;border-color:rgba(232,255,74,.15)}
+
+/* ── NAV ─────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 2.5rem;transition:background .3s,backdrop-filter .3s,border-color .3s,padding .3s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(10,10,10,.78);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom-color:var(--border);padding:1rem 2.5rem}
+.nav-logo{font-family:"Bebas Neue",sans-serif;font-size:1.15rem;letter-spacing:.14em;color:var(--white);text-decoration:none}
 .nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{color:var(--txt2);text-decoration:none;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:color .2s;cursor:pointer}
-.nav-cta{cursor:pointer}
-.nav-links a:hover{color:var(--accent)}
-.nav-cta{background:var(--txt);color:#fff;padding:.5rem 1.25rem;border-radius:var(--radius);font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .15s}
-#hamburger{display:none}
+.nav-links a{font-size:.68rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--accent);color:var(--black);text-decoration:none;padding:.5rem 1.35rem;border-radius:2px;transition:background .2s}
+.nav-cta:hover{background:#fff}
 
-/* HERO */
-#hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:6rem var(--gutter) 4rem;gap:4rem;max-width:1280px;margin:0 auto}
-.hero-eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:2rem}
-.eyebrow-line{width:32px;height:1px;background:var(--accent)}
-.eyebrow-txt{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-.hero-name{font-size:clamp(2.8rem,5vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:.75rem}
-.hero-role{font-size:1.1rem;font-weight:400;color:var(--txt2);margin-bottom:1.5rem;line-height:1.6}
-.hero-desc{font-size:.92rem;color:var(--txt3);line-height:1.8;max-width:440px;margin-bottom:2.5rem}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-dark{background:var(--txt);color:#fff;padding:.75rem 1.75rem;border-radius:var(--radius);font-size:.82rem;font-weight:600;letter-spacing:.04em;text-decoration:none;transition:background .2s,transform .15s}
-.btn-dark:hover{background:var(--accent);transform:translateY(-1px)}
-.btn-ghost{background:transparent;color:var(--txt);padding:.75rem 1.75rem;border-radius:var(--radius);font-size:.82rem;font-weight:600;letter-spacing:.04em;text-decoration:none;border:1.5px solid var(--border);transition:border-color .2s,transform .15s}
-.btn-ghost:hover{border-color:var(--txt);transform:translateY(-1px)}
-.hero-right{display:flex;flex-direction:column;gap:1rem}
-.hero-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow)}
-.hero-card-label{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--txt3);margin-bottom:.4rem}
-.hero-card-val{font-size:1.6rem;font-weight:800;color:var(--txt);letter-spacing:-.02em}
-.hero-card-sub{font-size:.78rem;color:var(--txt2);margin-top:.2rem}
-.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.hero-avail{background:var(--accent-light);border:1px solid #C3DDF5;border-radius:var(--radius-lg);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.75rem}
-.avail-dot{width:8px;height:8px;border-radius:50%;background:#16A34A;flex-shrink:0;box-shadow:0 0 0 3px #DCF5E4}
-.avail-txt{font-size:.82rem;font-weight:500;color:var(--accent)}
+/* ── HERO ────────────────────────────────────── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr auto;align-items:stretch;position:relative;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:flex-end;padding:0 2.5rem 4.5rem;position:relative;z-index:2}
+.hero-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding-left:2rem;pointer-events:none;user-select:none;z-index:0}
+.hero-bg-word{font-family:"Bebas Neue",sans-serif;font-size:clamp(120px,20vw,300px);color:rgba(255,255,255,.022);letter-spacing:-.02em;line-height:1}
+.hero-right{position:relative;width:clamp(320px,38vw,560px);display:flex;align-items:flex-end;flex-shrink:0;z-index:3}
+.hero-portrait{width:100%;height:100%;object-fit:contain;object-position:bottom center;display:block}
+.hero-eyebrow{font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);margin-bottom:1.5rem;display:flex;align-items:center;gap:.75rem;position:relative;z-index:2}
+.hero-eyebrow::before{content:"";width:28px;height:1px;background:var(--muted)}
+.hero-h1{font-family:"Bebas Neue",sans-serif;font-size:clamp(52px,8.5vw,128px);line-height:.92;letter-spacing:-.01em;margin-bottom:3rem;position:relative;z-index:2}
+.hero-h1 .accent{color:var(--accent)}
+.hero-badge{display:inline-flex;align-items:center;gap:.45rem;background:var(--grey2);border:1px solid var(--border2);border-radius:100px;padding:.38rem 1rem;font-family:"DM Sans",sans-serif;font-size:.65rem;font-weight:500;letter-spacing:.06em;color:var(--muted2);vertical-align:middle;position:relative;top:-.4em;margin-left:.5rem}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;position:relative;z-index:2}
+.hero-desc{max-width:340px;font-size:.88rem;color:var(--muted2);line-height:1.8;font-weight:300}
+.hero-nums{display:flex;gap:3rem}
+.hero-num-val{font-family:"Bebas Neue",sans-serif;font-size:2.8rem;letter-spacing:-.02em;color:var(--white);line-height:1}
+.hero-num-lbl{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.15rem}
+.scroll-hint{position:absolute;left:2.5rem;bottom:2.5rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;font-size:.55rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);z-index:3}
+.scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--muted),transparent);animation:sl 2s ease-in-out infinite}
+@keyframes sl{0%{transform:scaleY(0);transform-origin:top}49%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-/* SHARED */
-:root{--gutter:3rem}
-.section-wrap{padding:6rem var(--gutter);max-width:1280px;margin:0 auto}
-.section-wrap.full{max-width:100%;background:var(--bg2);padding:6rem var(--gutter)}
-.section-wrap.full .inner{max-width:calc(1280px - var(--gutter)*2);margin:0 auto}
-.section-eyebrow{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
-.section-title{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;letter-spacing:-.02em;color:var(--txt);margin-bottom:3rem}
+/* ── SECTION COMMONS ─────────────────────────── */
+.sec{padding:5.5rem 2.5rem;border-top:1px solid var(--border)}
+.sec-num{font-family:"DM Mono",monospace;font-size:.6rem;color:var(--muted);letter-spacing:.12em;margin-bottom:.5rem}
+.sec-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.4rem,5.5vw,5rem);line-height:.95;letter-spacing:-.01em}
+.sec-rule{width:36px;height:1px;background:var(--accent);margin:1rem 0 3rem}
+.sec-sub{max-width:300px;font-size:.8rem;color:var(--muted2);line-height:1.8;font-weight:300}
+.fu{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.fu.vis{opacity:1;transform:none}
 
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start}
-.about-img{aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;position:relative;cursor:pointer}
-.about-img img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block}
-.about-img-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem;background:rgba(240,245,251,0.9);transition:opacity .2s}
-.about-img-overlay span{font-size:.75rem;font-weight:600;color:var(--accent)}
-.name-bar{font-size:.72rem;font-weight:600;letter-spacing:.08em;position:absolute;bottom:0;left:0;right:0;padding:.75rem;background:rgba(15,31,53,0.75);color:#fff;text-align:center;text-transform:uppercase;z-index:5}
-.about-body p{font-size:.95rem;color:var(--txt2);line-height:1.9;margin-bottom:1.25rem}
-.about-facts{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:2rem}
-.fact-item{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;display:flex;align-items:center;gap:.65rem}
-.fact-txt{font-size:.8rem;color:var(--txt2);font-weight:500}
+/* ── ABOUT ───────────────────────────────────── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);margin-top:2rem}
+.about-l{padding:3rem;border-right:1px solid var(--border)}
+.about-r{padding:3rem;display:flex;flex-direction:column;gap:1.75rem}
+.big-txt{font-family:"Bebas Neue",sans-serif;font-size:clamp(3rem,6vw,6.5rem);line-height:.9;letter-spacing:-.02em}
+.big-txt .dim{color:var(--muted)}
+.tags-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.5rem}
+.tag-pill{font-size:.6rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;padding:.3rem .8rem;border:1px solid var(--border2);border-radius:100px;color:var(--muted2);transition:border-color .2s,color .2s}
+.tag-pill:hover{border-color:var(--accent);color:var(--accent)}
+.about-desc-txt{font-size:.85rem;color:var(--muted2);line-height:1.85;font-weight:300}
+.exp-row{display:flex;gap:1rem;padding:.85rem 0;border-bottom:1px solid var(--border)}
+.exp-row:last-child{border-bottom:none}
+.exp-yr{font-family:"DM Mono",monospace;font-size:.65rem;color:var(--muted);width:64px;flex-shrink:0;padding-top:.12rem}
+.exp-name{font-size:.82rem;font-weight:500;color:var(--white);margin-bottom:.1rem}
+.exp-role{font-size:.7rem;color:var(--muted);font-weight:300}
+.meta-label{font-size:.55rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;padding-top:1.25rem;border-top:1px solid var(--border)}
+.meta-list{display:flex;flex-direction:column;gap:.3rem}
+.meta-item{font-size:.72rem;color:var(--muted2);font-weight:300;line-height:1.5}
 
-/* EXPERIENCE */
-.section-wrap.full#experience{background:var(--bg2)}
-.timeline{display:flex;flex-direction:column;position:relative}
-.exp-item{display:grid;grid-template-columns:200px 24px 1fr;padding-bottom:3.5rem;align-items:start}
-.exp-item:last-child{padding-bottom:0}
-.exp-meta{text-align:right;padding-right:1.25rem;padding-top:2px}
-.exp-period{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:.3rem}
-.exp-company{font-size:.82rem;color:var(--txt2);font-weight:500}
-.exp-stepper{display:flex;flex-direction:column;align-items:center;position:relative}
-.exp-dot{width:11px;height:11px;border-radius:50%;background:var(--bg2);border:2px solid var(--accent);flex-shrink:0;z-index:2;margin-top:3px}
-.exp-stepper::after{content:'';position:absolute;top:14px;left:50%;transform:translateX(-50%);width:2px;background:var(--border);bottom:-3.5rem;z-index:1}
-.exp-item:last-child .exp-stepper::after{display:none}
-.exp-card-clean{padding-left:1.5rem}
-.exp-role{font-size:1.05rem;font-weight:700;color:var(--txt);margin-bottom:.4rem}
-.exp-desc{font-size:.85rem;color:var(--txt2);line-height:1.75}
+/* ── CLIENT LOGOS ────────────────────────────── */
+.logos-sec{border-top:1px solid var(--border);padding:3.5rem 0}
+.logos-hd{padding:0 2.5rem;margin-bottom:2.25rem;display:flex;align-items:baseline;gap:1rem}
+.logos-eyebrow{font-size:.56rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.logos-title{font-family:"Bebas Neue",sans-serif;font-size:1.5rem;letter-spacing:.02em;color:var(--white)}
+.logos-track-wrap{overflow:hidden;position:relative}
+.logos-track-wrap::before,.logos-track-wrap::after{content:"";position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none}
+.logos-track-wrap::before{left:0;background:linear-gradient(to right,var(--black),transparent)}
+.logos-track-wrap::after{right:0;background:linear-gradient(to left,var(--black),transparent)}
+.logos-track{display:flex;width:max-content;animation:logoScroll 38s linear infinite}
+.logos-track:hover{animation-play-state:paused}
+@keyframes logoScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.cli{display:flex;align-items:center;justify-content:center;padding:0 3rem;height:68px;border-right:1px solid var(--border);flex-shrink:0;opacity:.28;filter:grayscale(1) brightness(1.8);transition:opacity .25s,filter .25s}
+.cli:hover{opacity:.9;filter:none}
 
-/* EDUCATION */
-.edu-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.edu-card{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:2rem;transition:box-shadow .2s,transform .2s}
-.edu-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
-.edu-num{font-size:2.5rem;font-weight:800;color:var(--border);letter-spacing:-.04em;margin-bottom:.75rem}
-.edu-deg{font-size:.95rem;font-weight:700;color:var(--txt);margin-bottom:.3rem}
-.edu-inst{font-size:.83rem;font-weight:600;color:var(--accent);margin-bottom:.2rem}
-.edu-loc{font-size:.75rem;color:var(--txt3)}
+/* ── WORK ────────────────────────────────────── */
+#projGrid{display:flex;flex-direction:column}
+.proj-card{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--border);cursor:none;transition:background .25s;min-height:260px}
+.proj-card:hover{background:var(--grey2)}
+.proj-l{padding:2.75rem;border-right:1px solid var(--border);display:flex;flex-direction:column;justify-content:space-between}
+.proj-r{padding:2.75rem;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.proj-num{font-family:"DM Mono",monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em;margin-bottom:1rem}
+.proj-name{font-family:"Bebas Neue",sans-serif;font-size:clamp(1.8rem,3vw,3rem);line-height:.95;color:var(--white);margin-bottom:.65rem}
+.proj-blurb{font-size:.78rem;color:var(--muted2);line-height:1.75;font-weight:300;max-width:320px}
+.proj-tags-row{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:auto;padding-top:1.5rem}
+.ptag{font-size:.58rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .65rem;border:1px solid var(--border2);border-radius:100px;color:var(--muted)}
+.proj-cta-txt{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:.4rem;margin-top:auto;transition:color .2s}
+.proj-card:hover .proj-cta-txt{color:var(--accent)}
+.proj-card:hover .proj-cta-txt svg{transform:translate(3px,-3px)}
+.proj-cta-txt svg{transition:transform .2s}
+.proj-ico-bg{position:absolute;bottom:-20px;right:-20px;font-size:160px;line-height:1;opacity:.05;pointer-events:none;transition:opacity .3s;font-family:monospace}
+.proj-card:hover .proj-ico-bg{opacity:.1}
+.proj-r-caption{font-size:.65rem;color:rgba(255,255,255,.3);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.4rem}
+.proj-r-preview{font-size:.75rem;color:rgba(255,255,255,.5);line-height:1.7;font-weight:300;max-width:240px}
 
-/* SKILLS */
-.skill-grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
-.skill-col{background:var(--bg2);padding:1.75rem 1.25rem;display:flex;flex-direction:column;gap:1rem;transition:background .2s}
-.skill-col:hover{background:var(--bg3)}
-.skill-col-head{display:flex;flex-direction:column;gap:.6rem}
-.skill-ico-box{width:40px;height:40px;background:var(--accent-light);border-radius:var(--radius);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.skill-col-name{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);line-height:1.3}
-.skill-divider{width:24px;height:1.5px;background:var(--accent);opacity:.35;border-radius:1px}
-.skill-items{display:flex;flex-direction:column;gap:.35rem;list-style:none}
-.skill-items li{font-size:.75rem;color:var(--txt2);line-height:1.5;padding:.25rem 0;border-bottom:1px solid var(--border);cursor:default;transition:color .15s}
-.skill-items li:last-child{border-bottom:none}
-.skill-items li:hover{color:var(--accent)}
-@media(max-width:900px){.skill-grid-6{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:540px){.skill-grid-6{grid-template-columns:repeat(2,1fr)}}
+/* ── SKILLS ──────────────────────────────────── */
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);margin-top:2rem}
+.sk{padding:1.75rem;border-right:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .2s}
+.sk:nth-child(4n){border-right:none}
+.sk:nth-last-child(-n+4){border-bottom:none}
+.sk:hover{background:var(--grey2)}
+.sk-ico{font-size:1.3rem;margin-bottom:.85rem;display:block}
+.sk-name{font-size:.82rem;font-weight:500;color:var(--white);margin-bottom:.35rem}
+.sk-desc{font-size:.7rem;color:var(--muted);line-height:1.65;font-weight:300}
 
-/* PROJECTS */
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.proj-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:box-shadow .25s,transform .25s;cursor:pointer}
-.proj-card:hover{box-shadow:var(--shadow-md);transform:translateY(-3px)}
-.proj-thumb{height:180px;display:flex;align-items:center;justify-content:center;position:relative}
-.proj-thumb-label{position:absolute;bottom:.75rem;right:.75rem;font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.3rem .7rem;border-radius:2px;background:rgba(255,255,255,0.9);color:var(--txt)}
-.proj-ico-wrap{display:flex;align-items:center;justify-content:center;width:64px;height:64px;background:rgba(255,255,255,0.75);border-radius:12px;border:1px solid rgba(27,108,168,.12)}
-.proj-body{padding:1.5rem;border-top:1px solid var(--border)}
-.proj-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem}
-.proj-tag{font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;border-radius:2px;background:var(--bg3);color:var(--txt2)}
-.proj-name{font-size:.98rem;font-weight:700;color:var(--txt);margin-bottom:.4rem}
-.proj-desc{font-size:.8rem;color:var(--txt2);line-height:1.7}
-.proj-card{cursor:pointer}
+/* ── PROCESS / STRATEGY ─────────────────────── */
+.strategy-sec{border-top:1px solid var(--border);padding:5.5rem 0}
+.strategy-top{padding:0 2.5rem;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:3.5rem}
+.strategy-label{font-size:.58rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem}
+.strategy-headline{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.8rem,6vw,6rem);line-height:.92;letter-spacing:-.01em}
+.strategy-headline em{color:var(--accent);font-style:normal}
+.strategy-desc{max-width:280px;font-size:.82rem;color:var(--muted2);line-height:1.8;font-weight:300;text-align:right}
+.strategy-rows{border-bottom:1px solid var(--border)}
+.strategy-row{border-top:1px solid var(--border);overflow:hidden}
+.strategy-row-head{display:flex;align-items:center;gap:2rem;padding:1.75rem 2.5rem;cursor:none;transition:background .2s}
+.strategy-row:hover .strategy-row-head,.strategy-row-head.active{background:var(--grey2)}
+.strategy-row-num{font-family:"DM Mono",monospace;font-size:.65rem;color:var(--muted);letter-spacing:.1em;width:28px;flex-shrink:0}
+.strategy-row-name{font-family:"Bebas Neue",sans-serif;font-size:clamp(1.6rem,3.5vw,3rem);letter-spacing:-.01em;line-height:1;flex:1;transition:color .2s}
+.strategy-row:hover .strategy-row-name,.strategy-row-head.active .strategy-row-name{color:var(--accent)}
+.strategy-row-tag{font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .8rem;border:1px solid var(--border2);border-radius:100px;color:var(--muted2);white-space:nowrap}
+.strategy-row-arrow{width:36px;height:36px;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .35s,background .2s,border-color .2s}
+.strategy-row-head.active .strategy-row-arrow{transform:rotate(45deg);background:var(--accent);border-color:var(--accent)}
+.strategy-row-head.active .strategy-row-arrow svg{stroke:#0A0A0A}
+.strategy-row-body{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.16,1,.3,1)}
+.strategy-row-body.open{max-height:320px}
+.strategy-row-inner{display:grid;grid-template-columns:1fr 2fr;gap:3rem;padding:0 2.5rem 2rem calc(2.5rem + 28px + 2rem)}
+.strategy-row-inner p{font-size:.85rem;color:var(--muted2);line-height:1.85;font-weight:300}
+.strategy-row-tools{display:flex;flex-wrap:wrap;gap:.4rem;align-content:flex-start}
+.str-tool{font-size:.6rem;font-weight:500;letter-spacing:.07em;text-transform:uppercase;padding:.26rem .7rem;border:1px solid var(--border2);border-radius:100px;color:var(--muted2)}
 
-/* PROJECT MODAL */
-.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(10,20,35,0.65);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s ease;display:flex;align-items:center;justify-content:center;padding:1rem 2rem}
+/* ── CONTACT ─────────────────────────────────── */
+.contact-wrap{display:flex;align-items:center;justify-content:space-between;gap:3rem}
+.contact-h{font-family:"Bebas Neue",sans-serif;font-size:clamp(2.8rem,7.5vw,7.5rem);line-height:.9;letter-spacing:-.02em}
+.contact-h .em{color:var(--accent)}
+.contact-r{flex-shrink:0;display:flex;flex-direction:column;gap:.75rem;min-width:280px}
+.c-link{display:flex;align-items:center;gap:.75rem;text-decoration:none;font-size:.75rem;color:var(--muted2);padding:.5rem 0;border-bottom:1px solid var(--border);transition:color .2s}
+.c-link:hover{color:var(--white)}
+.c-ico{width:30px;height:30px;background:var(--grey2);border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.btn-acc{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:var(--black);text-decoration:none;padding:.8rem 1.75rem;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:2px;transition:background .2s,transform .15s;margin-top:.25rem}
+.btn-acc:hover{background:#fff;transform:translateY(-2px)}
+
+/* ── FOOTER ──────────────────────────────────── */
+footer{border-top:1px solid var(--border);padding:1.75rem 2.5rem;display:flex;justify-content:space-between;align-items:center}
+.foot-l{font-family:"Bebas Neue",sans-serif;font-size:.95rem;letter-spacing:.12em;color:var(--muted)}
+.foot-r{font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+/* ── MODAL ───────────────────────────────────── */
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);opacity:0;pointer-events:none;transition:opacity .3s;display:flex;align-items:center;justify-content:center;padding:1.5rem 2rem}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:12px;width:100%;max-width:1080px;max-height:92vh;overflow-y:auto;box-shadow:0 24px 80px rgba(10,20,35,.22);transform:translateY(20px) scale(.98);transition:transform .3s ease;position:relative}
-.modal-overlay.open .modal-box{transform:translateY(0) scale(1)}
-.modal-hero{height:220px;display:flex;align-items:center;justify-content:center;position:relative;border-radius:12px 12px 0 0;overflow:hidden;flex-shrink:0}
-.modal-hero-ico{width:80px;height:80px;background:rgba(255,255,255,.8);border-radius:16px;border:1px solid rgba(27,108,168,.15);display:flex;align-items:center;justify-content:center}
-.modal-badge{position:absolute;top:1rem;left:1rem;font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .75rem;border-radius:3px;background:rgba(255,255,255,.9);color:var(--txt)}
-.modal-close{position:absolute;top:1rem;right:1rem;width:34px;height:34px;background:rgba(255,255,255,.9);border:1px solid var(--border);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:10}
-.modal-close:hover{background:#fff}
-.modal-close svg{display:block}
-.modal-body{padding:2rem 2.5rem 2.5rem}
-.modal-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1rem}
-.modal-tag{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.28rem .65rem;border-radius:3px;background:var(--accent-light);color:var(--accent)}
-.modal-title{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;color:var(--txt);margin-bottom:.5rem}
-.modal-subtitle{font-size:.88rem;color:var(--txt2);line-height:1.75;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
-.modal-sections{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:2rem}
-.modal-section-title{font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.65rem;display:flex;align-items:center;gap:.5rem}
-.modal-section-title::after{content:'';flex:1;height:1px;background:var(--border)}
-.modal-section-body{font-size:.82rem;color:var(--txt2);line-height:1.8}
-.modal-tools{grid-column:1/-1}
-.modal-tool-pills{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.1rem}
-.modal-tool-pill{font-size:.72rem;font-weight:500;padding:.3rem .8rem;border-radius:20px;background:var(--bg3);border:1px solid var(--border);color:var(--txt2)}
-.modal-metrics{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-.modal-metric-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
-.modal-metric-val{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;color:var(--accent);margin-bottom:.2rem}
-.modal-metric-lbl{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txt3)}
-.modal-process{grid-column:1/-1}
-.process-steps{display:flex;gap:0;margin-top:.5rem;border:1px solid var(--border);border-radius:8px;overflow:hidden}
-.process-step{flex:1;padding:.75rem .65rem;text-align:center;border-right:1px solid var(--border);position:relative}
-.process-step:last-child{border-right:none}
-.process-step-num{font-size:.6rem;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.25rem}
-.process-step-name{font-size:.7rem;font-weight:600;color:var(--txt)}
-/* IMAGE CASE STUDY MODE */
-.modal-box.img-mode .modal-hero{display:none}
-.modal-img-wrap{width:100%;padding:0}
-.modal-img-wrap img{width:100%;display:block;border-radius:0 0 12px 12px}
-.modal-img-header{padding:1.5rem 2rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg2);z-index:5;border-radius:12px 12px 0 0}
-.modal-img-meta{display:flex;flex-direction:column;gap:.25rem}
-.modal-img-title{font-size:1.1rem;font-weight:800;letter-spacing:-.02em;color:var(--txt)}
-.modal-img-sub{font-size:.75rem;color:var(--txt3);font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.modal-box{background:#111;border:1px solid var(--border2);border-radius:6px;width:100%;max-width:1100px;max-height:92vh;overflow-y:auto;box-shadow:0 40px 120px rgba(0,0,0,.7);transform:translateY(20px) scale(.97);transition:transform .35s cubic-bezier(.16,1,.3,1);position:relative}
+.modal-overlay.open .modal-box{transform:none}
+.modal-img-header{padding:1.25rem 1.75rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);position:sticky;top:0;background:#111;z-index:5}
+.modal-img-title{font-family:"Bebas Neue",sans-serif;font-size:1.4rem;letter-spacing:.04em;color:var(--white);margin-bottom:.1rem}
+.modal-img-sub{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .modal-img-tags{display:flex;gap:.35rem;flex-wrap:wrap}
-.modal-img-zoom{display:flex;align-items:center;gap:.5rem}
-.modal-zoom-btn{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:.4rem .7rem;cursor:pointer;font-size:.75rem;font-weight:600;color:var(--txt2);transition:background .15s;line-height:1}
-.modal-zoom-btn:hover{background:var(--accent-light);color:var(--accent)}
-@media(max-width:600px){
-  .modal-sections{grid-template-columns:1fr}
-  .modal-metrics{grid-template-columns:1fr 1fr}
-  .modal-body{padding:1.5rem}
-  .process-steps{flex-wrap:wrap}
-  .process-step{border-bottom:1px solid var(--border)}
-  .modal-img-header{flex-direction:column;align-items:flex-start;gap:.75rem}
-}
+.modal-tag{font-size:.56rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.2rem .6rem;border:1px solid var(--border2);border-radius:100px;color:var(--muted2)}
+.modal-img-zoom{display:flex;align-items:center;gap:.4rem}
+.modal-zoom-btn{background:var(--grey2);border:1px solid var(--border2);border-radius:2px;width:28px;height:28px;cursor:none;font-size:.85rem;color:var(--muted2);display:flex;align-items:center;justify-content:center;transition:background .15s;line-height:1}
+.modal-zoom-btn:hover{background:var(--grey3);color:var(--white)}
+.modal-close{width:32px;height:32px;background:var(--grey2);border:1px solid var(--border2);border-radius:50%;cursor:none;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.modal-close:hover{background:var(--grey3)}
+.modal-img-wrap img{width:100%;display:block}
+.modal-hero{height:180px;display:flex;align-items:center;justify-content:center;position:relative}
+.modal-badge{position:absolute;top:1rem;left:1rem;font-size:.56rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.26rem .7rem;border-radius:2px;background:rgba(255,255,255,.9);color:#0a0a0a}
+.modal-body{padding:2rem 2.5rem 2.5rem}
+.modal-tags{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.85rem}
+.modal-title{font-family:"Bebas Neue",sans-serif;font-size:1.9rem;letter-spacing:.02em;color:var(--white);margin-bottom:.45rem}
+.modal-subtitle{font-size:.82rem;color:var(--muted2);line-height:1.8;margin-bottom:1.75rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+.modal-sections{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+.modal-section-title{font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.modal-section-title::after{content:"";flex:1;height:1px;background:var(--border)}
+.modal-section-body{font-size:.78rem;color:var(--muted2);line-height:1.8}
+.modal-tools{grid-column:1/-1}
+.modal-tool-pills{display:flex;flex-wrap:wrap;gap:.35rem}
+.modal-tool-pill{font-size:.68rem;padding:.25rem .7rem;border-radius:100px;border:1px solid var(--border2);color:var(--muted2)}
+.modal-metrics{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:.85rem}
+.modal-metric-card{background:var(--grey2);border:1px solid var(--border);border-radius:4px;padding:.85rem;text-align:center}
+.modal-metric-val{font-family:"Bebas Neue",sans-serif;font-size:1.8rem;letter-spacing:.02em;color:var(--accent);margin-bottom:.15rem}
+.modal-metric-lbl{font-size:.6rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.modal-process{grid-column:1/-1}
+.process-steps{display:flex;border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.process-step{flex:1;padding:.7rem .5rem;text-align:center;border-right:1px solid var(--border)}
+.process-step:last-child{border-right:none}
+.process-step-num{font-size:.56rem;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.2rem}
+.process-step-name{font-size:.65rem;font-weight:500;color:var(--muted2)}
 
-/* CONTACT */
-.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.contact-left h2{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:800;letter-spacing:-.02em;margin-bottom:1rem}
-.contact-left p{font-size:.92rem;color:var(--txt2);line-height:1.8;margin-bottom:2rem}
-.contact-email{display:flex;align-items:center;gap:.5rem;font-size:.92rem;font-weight:600;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);padding-bottom:.2rem;width:fit-content;transition:opacity .2s}
-.contact-email:hover{opacity:.7}
-.socials{display:flex;gap:.75rem;margin-top:2rem;flex-wrap:wrap}
-.soc{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.5rem 1rem;border:1.5px solid var(--border);border-radius:var(--radius);color:var(--txt2);text-decoration:none;transition:border-color .2s,color .2s}
-.soc:hover{border-color:var(--txt);color:var(--txt)}
-.contact-form{display:flex;flex-direction:column;gap:1.25rem}
-.field{display:flex;flex-direction:column;gap:.4rem}
-.field label{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--txt3)}
-.field input,.field textarea{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius);padding:.8rem 1rem;color:var(--txt);font-size:.88rem;font-family:inherit;outline:none;transition:border-color .2s}
-.field input:focus,.field textarea:focus{border-color:var(--accent)}
-.field textarea{resize:vertical;min-height:120px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.btn-submit{background:var(--txt);color:#fff;padding:.8rem 2rem;border:none;border-radius:var(--radius);font-size:.82rem;font-weight:600;letter-spacing:.04em;cursor:pointer;align-self:flex-start;transition:background .2s,transform .15s}
-.btn-submit:hover{background:var(--accent);transform:translateY(-1px)}
-
-footer{border-top:1px solid var(--border);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;max-width:1280px;margin:0 auto}
-.footer-txt{font-size:.75rem;color:var(--txt3);letter-spacing:.04em}
-
-@media(max-width:900px){
-  #hero{grid-template-columns:1fr;padding:5rem 2rem 3rem}
-  .about-grid{grid-template-columns:1fr}
-  .exp-item{grid-template-columns:1fr;gap:.5rem}
-  .exp-meta{text-align:left;padding-right:0;padding-left:2rem}
-  .edu-row,.proj-grid{grid-template-columns:1fr}
-  .contact-wrap{grid-template-columns:1fr}
-  nav{padding:0 1.5rem}
+/* ── RESPONSIVE ──────────────────────────────── */
+@media(max-width:768px){
+  nav{padding:1.25rem 1.5rem}
   .nav-links{display:none}
-  .section-wrap,.section-wrap.full{padding:4rem 1.5rem}
-  footer{padding:1.5rem;flex-direction:column;gap:.5rem;text-align:center}
+  .hero{grid-template-columns:1fr;grid-template-rows:auto auto}
+  .hero-left{padding:7rem 1.5rem 3rem;order:2}
+  .hero-right{order:1;width:100%;height:60vw;max-height:360px}
+  .hero-portrait{object-fit:cover;object-position:top center}
+  .sec{padding:4rem 1.5rem}
+  .about-grid,.proj-card{grid-template-columns:1fr}
+  .about-l{border-right:none;border-bottom:1px solid var(--border)}
+  .about-r [style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  .about-r [style*="border-right"]{border-right:none!important;padding-right:0!important;border-bottom:1px solid var(--border);padding-bottom:1.5rem;margin-bottom:0}
+  .about-r [style*="padding-left:2rem"]{padding-left:0!important}
+  .proj-l{border-right:none;border-bottom:1px solid var(--border)}
+  .skills-grid{grid-template-columns:1fr 1fr}
+  .contact-wrap{flex-direction:column;align-items:flex-start}
+  .modal-sections{grid-template-columns:1fr}
+  .modal-img-header{flex-wrap:wrap;gap:.5rem}
+  .strategy-top{flex-direction:column;align-items:flex-start}
+  .strategy-desc{text-align:left;max-width:100%}
+  .strategy-row-inner{grid-template-columns:1fr;gap:1.25rem;padding:0 1.5rem 1.5rem}
+  .strategy-row-head{padding:1.25rem 1.5rem;gap:1rem}
+  .strategy-row-tag{display:none}
+  .hero-foot{flex-direction:column;align-items:flex-start}
+  .scroll-hint{display:none}
 }
 </style>
 </head>
 <body>
 
+<div class="cursor" id="C"></div>
+<div class="cursor-ring" id="CR"></div>
+
+<!-- NAV -->
 <nav>
-  <span class="logo">HNK</span>
+  <a class="nav-logo" href="#">HNK<span style="color:var(--accent)">.</span></a>
   <ul class="nav-links">
-    <li><a onclick="nav('about')">About</a></li>
-    <li><a onclick="nav('experience')">Experience</a></li>
-    <li><a onclick="nav('education')">Education</a></li>
-    <li><a onclick="nav('skills')">Skills</a></li>
-    <li><a onclick="nav('projects')">Projects</a></li>
-    <li><a onclick="nav('contact')">Contact</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <div style="display:flex;align-items:center;gap:1rem">
-    <a class="nav-cta" onclick="nav('contact')">Hire me</a>
-    <div id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-  </div>
+  <a class="nav-cta" href="#contact">Hire Me</a>
 </nav>
-<div id="mobile-menu">
-  <a onclick="nav('about');toggleMenu()">About</a>
-  <a onclick="nav('experience');toggleMenu()">Experience</a>
-  <a onclick="nav('education');toggleMenu()">Education</a>
-  <a onclick="nav('skills');toggleMenu()">Skills</a>
-  <a onclick="nav('projects');toggleMenu()">Projects</a>
-  <a onclick="nav('contact');toggleMenu()">Contact</a>
-</div>
 
 <!-- HERO -->
-<div id="hero">
+<section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Portfolio</span></div>
-    <div class="hero-name">Hari Naga<br>Kumar</div>
-    <div class="hero-role">Lead UI/UX Designer &amp; Visual Strategist</div>
-    <div class="hero-desc">Transforming complex problems into intuitive, scalable digital experiences across banking, healthcare, and AI SaaS platforms.</div>
-    <div class="hero-btns">
-      <a class="btn-dark" onclick="nav('projects')" style="cursor:pointer">View Work →</a>
-      <a class="btn-ghost" onclick="nav('contact')" style="cursor:pointer">Get in touch</a>
+    <div class="hero-bg"><div class="hero-bg-word">UX</div></div>
+    <div class="hero-eyebrow">Lead UI/UX Designer &nbsp;&middot;&nbsp; Hyderabad, India</div>
+    <h1 class="hero-h1">
+      Crafting<br>
+      <span class="accent">Digital</span><span class="hero-badge"><span class="dot"></span> Available</span><br>
+      Experiences
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-desc">Lead UI/UX Designer with 12+ years designing scalable SaaS platforms, enterprise dashboards, and data-driven applications across banking, healthcare, and AI domains.</p>
+      <div class="hero-nums">
+        <div><div class="hero-num-val">12+</div><div class="hero-num-lbl">Years Exp</div></div>
+        <div><div class="hero-num-val">50+</div><div class="hero-num-lbl">Projects</div></div>
+        <div><div class="hero-num-val">5+</div><div class="hero-num-lbl">Industries</div></div>
+      </div>
     </div>
+    <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
   </div>
   <div class="hero-right">
-    <div class="hero-stats">
-      <div class="hero-card"><div class="hero-card-label">Experience</div><div class="hero-card-val">12+</div><div class="hero-card-sub">Years in design</div></div>
-      <div class="hero-card"><div class="hero-card-label">Companies</div><div class="hero-card-val">6</div><div class="hero-card-sub">Across industries</div></div>
-      <div class="hero-card"><div class="hero-card-label">Current Role</div><div class="hero-card-val" style="font-size:1rem;line-height:1.3">Lead UI/UX<br>Designer</div><div class="hero-card-sub">Bizacuity Solutions</div></div>
-      <div class="hero-card"><div class="hero-card-label">Domains</div><div class="hero-card-val" style="font-size:1rem;line-height:1.3">Banking,<br>Health, AI</div><div class="hero-card-sub">SaaS · Dashboards</div></div>
-    </div>
+    <img class="hero-portrait" src="images/hnk.png" alt="Hari Naga Kumar">
   </div>
-</div>
+</section>
 
 <!-- ABOUT -->
-<div class="section-wrap" id="about" style="scroll-margin-top:60px">
-  <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Who I am</span></div>
-  <div class="section-title">About me</div>
-  <div class="about-grid">
-    <div class="about-img" id="aboutImgBox">
-      <img src="profile.png" alt="Hari Naga Kumar" style="width:100%;height:100%;object-fit:cover;object-position:center top;position:absolute;inset:0;display:block;">
-      <div class="name-bar">Hari Naga Kumar</div>
+<section class="sec" id="about">
+  <div class="sec-num">/ 01</div>
+  <h2 class="sec-title fu">About Me</h2>
+  <div class="sec-rule"></div>
+  <div class="about-grid fu">
+    <div class="about-l">
+      <div class="big-txt">UX<br><span class="dim">Designer</span><br>&amp; Visual<br><span class="dim">Thinker</span></div>
+      <div class="tags-row">
+        <span class="tag-pill">Banking</span>
+        <span class="tag-pill">Healthcare</span>
+        <span class="tag-pill">AI / SaaS</span>
+        <span class="tag-pill">E-learning</span>
+        <span class="tag-pill">Data Viz</span>
+        <span class="tag-pill">Agile / Scrum</span>
+      </div>
     </div>
-    <div class="about-body">
-      <p>I'm Hari Naga Kumar — a Lead UI/UX Designer with 12+ years of experience crafting intuitive, scalable digital products across startups and enterprises. I specialise in transforming complex problems into user-centric solutions through research, wireframing, prototyping, and data-driven dashboard design.</p>
-      <p>Experienced in Agile environments, I leverage UCD/HCD principles and tools like Jira to deliver impactful outcomes. Recently, I've been integrating AI-powered design workflows using Figma, Google Stitch, and Claude, while expanding into front-end development with Microsoft Visual Studio and GitHub Copilot.</p>
-      <p>Passionate about building meaningful, user-focused experiences and continuously evolving with design and technology.</p>
-      <div class="about-facts" id="aboutFacts"></div>
+    <div class="about-r">
+      <div>
+        <p class="about-desc-txt">I'm a Lead UI/UX Designer with 12+ years crafting scalable digital products across banking, healthcare, and AI. Expert in user research, interaction design, usability testing, and design systems — with a strong focus on conversion optimization, task success rate, and user engagement.</p>
+        <p class="about-desc-txt" style="margin-top:.85rem">Proven ability to collaborate with cross-functional teams in Agile environments and deliver high-impact, KPI-driven design solutions using Figma, Adobe XD, and AI-assisted workflows.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--border);margin-top:.25rem">
+
+        <!-- LEFT: Work Experience -->
+        <div style="padding-top:1.25rem;padding-right:2rem;border-right:1px solid var(--border)">
+          <div class="meta-label" style="padding-top:0;border-top:none">Work Experience</div>
+          <div class="exp-row"><div class="exp-yr">2023–Now</div><div><div class="exp-name">BizAcuity Solutions</div><div class="exp-role">Lead UI/UX Designer</div></div></div>
+          <div class="exp-row"><div class="exp-yr">2016–23</div><div><div class="exp-name">Gramener</div><div class="exp-role">Senior Information Designer</div></div></div>
+          <div class="exp-row"><div class="exp-yr">2014–16</div><div><div class="exp-name">Sai Sri Technologies</div><div class="exp-role">UI Designer</div></div></div>
+          <div class="exp-row"><div class="exp-yr">2013–14</div><div><div class="exp-name">LOGICPROG Technologies</div><div class="exp-role">UI Designer / Animator</div></div></div>
+          <div class="exp-row"><div class="exp-yr">2009–13</div><div><div class="exp-name">Caliber IT Solutions</div><div class="exp-role">Graphic Designer</div></div></div>
+          <div class="exp-row" style="border-bottom:none"><div class="exp-yr">2009</div><div><div class="exp-name">Rush Softech Pvt Ltd</div><div class="exp-role">Animator</div></div></div>
+        </div>
+
+        <!-- RIGHT: Education + Certifications -->
+        <div style="padding-top:1.25rem;padding-left:2rem">
+          <div class="meta-label" style="padding-top:0;border-top:none">Education</div>
+          <div class="meta-list" style="margin-bottom:1.5rem">
+            <div class="meta-item">BFA — Osmania University, Hyderabad</div>
+            <div class="meta-item">Diploma in Computer Engineering — Andhra University</div>
+          </div>
+          <div class="meta-label">Certifications</div>
+          <div class="meta-list">
+            <div class="meta-item">✦ Complete Figma Mega Course: UI/UX Beginner to Expert — Udemy</div>
+            <div class="meta-item">✦ Power BI Dashboard UX</div>
+            <div class="meta-item">✦ User Experience: The Beginner's Guide — IxDF</div>
+            <div class="meta-item">✦ Data-Driven Design (Quantitative UX) — IxDF</div>
+            <div class="meta-item">✦ UX Management &amp; Strategy — IxDF</div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- EXPERIENCE -->
-<div class="section-wrap full" id="experience" style="scroll-margin-top:60px">
-  <div class="inner">
-    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Career</span></div>
-    <div class="section-title">Work experience</div>
-    <div class="timeline" id="timeline"></div>
+<!-- CLIENT LOGOS -->
+<section class="logos-sec">
+  <div class="logos-hd">
+    <span class="logos-eyebrow">/ Clients &amp; Brands</span>
+    <span class="logos-title">Companies I've Worked With</span>
   </div>
-</div>
+  <div class="logos-track-wrap">
+    <div class="logos-track">
+      <div class="cli"><svg width="130" height="40" viewBox="0 0 130 40"><text x="0" y="28" font-family="sans-serif" font-size="22" font-weight="800" fill="white" letter-spacing="-1">Accenture</text></svg></div>
+      <div class="cli"><svg width="120" height="40" viewBox="0 0 120 40"><rect x="0" y="8" width="11" height="11" fill="white"/><rect x="13" y="8" width="11" height="11" fill="white"/><rect x="0" y="21" width="11" height="11" fill="white"/><rect x="13" y="21" width="11" height="11" fill="white"/><text x="32" y="28" font-family="sans-serif" font-size="16" font-weight="700" fill="white">Microsoft</text></svg></div>
+      <div class="cli"><svg width="80" height="40" viewBox="0 0 80 40"><text x="0" y="28" font-family="serif" font-size="24" font-weight="400" fill="white">Google</text></svg></div>
+      <div class="cli"><svg width="95" height="40" viewBox="0 0 95 40"><text x="0" y="28" font-family="sans-serif" font-size="18" font-weight="700" fill="white" letter-spacing="1">Deloitte</text></svg></div>
+      <div class="cli"><svg width="90" height="40" viewBox="0 0 90 40"><text x="0" y="25" font-family="sans-serif" font-size="13" font-weight="700" fill="white" letter-spacing="2">INFOSYS</text></svg></div>
+      <div class="cli"><svg width="55" height="40" viewBox="0 0 55 40"><text x="0" y="28" font-family="sans-serif" font-size="23" font-weight="900" fill="white" letter-spacing="-1">TCS</text></svg></div>
+      <div class="cli"><svg width="75" height="40" viewBox="0 0 75 40"><text x="0" y="28" font-family="sans-serif" font-size="20" font-weight="700" fill="white">Wipro</text></svg></div>
+      <div class="cli"><svg width="105" height="40" viewBox="0 0 105 40"><text x="0" y="28" font-family="sans-serif" font-size="18" font-weight="700" fill="white">Gramener</text></svg></div>
+      <div class="cli"><svg width="105" height="40" viewBox="0 0 105 40"><text x="0" y="28" font-family="sans-serif" font-size="15" font-weight="800" fill="white" letter-spacing=".5">BizAcuity</text></svg></div>
+      <div class="cli"><svg width="115" height="40" viewBox="0 0 115 40"><text x="0" y="25" font-family="sans-serif" font-size="13" font-weight="700" fill="white" letter-spacing="2">LOGICPROG</text></svg></div>
+      <!-- duplicate for seamless loop -->
+      <div class="cli"><svg width="130" height="40" viewBox="0 0 130 40"><text x="0" y="28" font-family="sans-serif" font-size="22" font-weight="800" fill="white" letter-spacing="-1">Accenture</text></svg></div>
+      <div class="cli"><svg width="120" height="40" viewBox="0 0 120 40"><rect x="0" y="8" width="11" height="11" fill="white"/><rect x="13" y="8" width="11" height="11" fill="white"/><rect x="0" y="21" width="11" height="11" fill="white"/><rect x="13" y="21" width="11" height="11" fill="white"/><text x="32" y="28" font-family="sans-serif" font-size="16" font-weight="700" fill="white">Microsoft</text></svg></div>
+      <div class="cli"><svg width="80" height="40" viewBox="0 0 80 40"><text x="0" y="28" font-family="serif" font-size="24" font-weight="400" fill="white">Google</text></svg></div>
+      <div class="cli"><svg width="95" height="40" viewBox="0 0 95 40"><text x="0" y="28" font-family="sans-serif" font-size="18" font-weight="700" fill="white" letter-spacing="1">Deloitte</text></svg></div>
+      <div class="cli"><svg width="90" height="40" viewBox="0 0 90 40"><text x="0" y="25" font-family="sans-serif" font-size="13" font-weight="700" fill="white" letter-spacing="2">INFOSYS</text></svg></div>
+      <div class="cli"><svg width="55" height="40" viewBox="0 0 55 40"><text x="0" y="28" font-family="sans-serif" font-size="23" font-weight="900" fill="white" letter-spacing="-1">TCS</text></svg></div>
+      <div class="cli"><svg width="75" height="40" viewBox="0 0 75 40"><text x="0" y="28" font-family="sans-serif" font-size="20" font-weight="700" fill="white">Wipro</text></svg></div>
+      <div class="cli"><svg width="105" height="40" viewBox="0 0 105 40"><text x="0" y="28" font-family="sans-serif" font-size="18" font-weight="700" fill="white">Gramener</text></svg></div>
+      <div class="cli"><svg width="105" height="40" viewBox="0 0 105 40"><text x="0" y="28" font-family="sans-serif" font-size="15" font-weight="800" fill="white" letter-spacing=".5">BizAcuity</text></svg></div>
+      <div class="cli"><svg width="115" height="40" viewBox="0 0 115 40"><text x="0" y="25" font-family="sans-serif" font-size="13" font-weight="700" fill="white" letter-spacing="2">LOGICPROG</text></svg></div>
+    </div>
+  </div>
+</section>
 
-<!-- EDUCATION -->
-<div class="section-wrap" id="education" style="scroll-margin-top:60px">
-  <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Academic background</span></div>
-  <div class="section-title">Education</div>
-  <div class="edu-row" id="eduGrid"></div>
-</div>
+<!-- WORK -->
+<section class="sec" id="work">
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:2rem">
+    <div>
+      <div class="sec-num">/ 02</div>
+      <h2 class="sec-title fu">Selected<br>Work</h2>
+      <div class="sec-rule"></div>
+    </div>
+    <p class="sec-sub" style="margin-top:3rem">Six case studies spanning AI-powered SaaS, healthcare, analytics, e-learning, and brand design.</p>
+  </div>
+  <div id="projGrid"></div>
+</section>
 
 <!-- SKILLS -->
-<div class="section-wrap full" id="skills" style="scroll-margin-top:60px">
-  <div class="inner">
-    <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">What I do</span></div>
-    <div class="section-title">Skills &amp; tools</div>
-    <div class="skill-grid-6" id="skillGrid"></div>
+<section class="sec" id="skills">
+  <div class="sec-num">/ 03</div>
+  <h2 class="sec-title fu">Capabilities</h2>
+  <div class="sec-rule"></div>
+  <div class="skills-grid fu">
+    <div class="sk"><span class="sk-ico">🎨</span><div class="sk-name">UX / UI / Product Design</div><div class="sk-desc">End-to-end product design — UX strategy, UI systems, interaction design, and scalable component libraries</div></div>
+    <div class="sk"><span class="sk-ico">🔍</span><div class="sk-name">User Research &amp; Testing</div><div class="sk-desc">User research, usability testing, A/B testing, persona creation, journey mapping, drop-off analysis</div></div>
+    <div class="sk"><span class="sk-ico">🧭</span><div class="sk-name">IA &amp; Interaction Design</div><div class="sk-desc">Information architecture, user flows, wireframing, prototyping, IxD patterns, micro-interactions</div></div>
+    <div class="sk"><span class="sk-ico">📊</span><div class="sk-name">Data Visualisation</div><div class="sk-desc">Dashboard design, KPI hierarchy, data storytelling, chart taxonomy — banking, healthcare, media domains</div></div>
+    <div class="sk"><span class="sk-ico">⚡</span><div class="sk-name">Design Systems</div><div class="sk-desc">Component libraries, design tokens, scalable systems — reduced design inconsistencies by 40% at BizAcuity</div></div>
+    <div class="sk"><span class="sk-ico">📈</span><div class="sk-name">CRO &amp; KPI-Driven UX</div><div class="sk-desc">Conversion rate optimisation, task success rate tracking, drop-off analysis, UX metrics strategy</div></div>
+    <div class="sk"><span class="sk-ico">🤖</span><div class="sk-name">AI-Assisted Workflows</div><div class="sk-desc">Figma Make, Claude AI, Google Stitch, GitHub Copilot — accelerated design workflows by ~25%</div></div>
+    <div class="sk"><span class="sk-ico">🛠</span><div class="sk-name">Tools</div><div class="sk-desc">Figma, Sketch, Adobe XD, Photoshop, Illustrator, HTML/CSS (basic), Jira, Agile / Scrum</div></div>
   </div>
-</div>
+</section>
 
-<!-- PROJECTS -->
-<div class="section-wrap" id="projects" style="scroll-margin-top:60px">
-  <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Selected work</span></div>
-  <div class="section-title">Projects</div>
-  <div class="proj-grid" id="projGrid"></div>
-</div>
+<!-- PROCESS -->
+<section class="strategy-sec" id="process">
+  <div class="strategy-top fu">
+    <div>
+      <div class="strategy-label">/ My Process</div>
+      <h2 class="strategy-headline">How I Approach<br>Every <em>Project</em></h2>
+    </div>
+    <p class="strategy-desc">12+ years of UX practice distilled into five repeatable steps — from understanding the real problem to shipping designs that move measurable KPIs.</p>
+  </div>
+  <div class="strategy-rows">
+    <div class="strategy-row">
+      <div class="strategy-row-head" onclick="toggleStrategy(this)">
+        <span class="strategy-row-num">01</span>
+        <span class="strategy-row-name">Discover &amp; Research</span>
+        <span class="strategy-row-tag">User Research</span>
+        <div class="strategy-row-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </div>
+      <div class="strategy-row-body">
+        <div class="strategy-row-inner">
+          <p>I start every project by understanding the real problem — not just the brief. Through stakeholder interviews, contextual observation, and data analysis I surface hidden pain points that shape everything downstream. No assumptions, only evidence.</p>
+          <div class="strategy-row-tools"><span class="str-tool">User Interviews</span><span class="str-tool">Contextual Inquiry</span><span class="str-tool">Surveys</span><span class="str-tool">Heuristic Audit</span><span class="str-tool">Analytics Review</span><span class="str-tool">FigJam</span><span class="str-tool">Dovetail</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="strategy-row">
+      <div class="strategy-row-head" onclick="toggleStrategy(this)">
+        <span class="strategy-row-num">02</span>
+        <span class="strategy-row-name">Define &amp; Synthesise</span>
+        <span class="strategy-row-tag">IA · Personas</span>
+        <div class="strategy-row-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </div>
+      <div class="strategy-row-body">
+        <div class="strategy-row-inner">
+          <p>Raw research becomes design direction. I build personas grounded in real behaviour, map journey flows to expose friction, and restructure information architecture around how people actually think — not how the system is built.</p>
+          <div class="strategy-row-tools"><span class="str-tool">Personas</span><span class="str-tool">Journey Mapping</span><span class="str-tool">Affinity Mapping</span><span class="str-tool">HMW Statements</span><span class="str-tool">Information Architecture</span><span class="str-tool">Miro</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="strategy-row">
+      <div class="strategy-row-head" onclick="toggleStrategy(this)">
+        <span class="strategy-row-num">03</span>
+        <span class="strategy-row-name">Design &amp; Prototype</span>
+        <span class="strategy-row-tag">UI · Figma</span>
+        <div class="strategy-row-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </div>
+      <div class="strategy-row-body">
+        <div class="strategy-row-inner">
+          <p>From paper sketches to high-fidelity interactive prototypes — I move fast and test often. AI-assisted tools (Figma Make, Claude AI) compress iteration time by ~25%, building scalable component systems that developers can implement without ambiguity.</p>
+          <div class="strategy-row-tools"><span class="str-tool">Wireframes</span><span class="str-tool">Hi-Fi Prototypes</span><span class="str-tool">Figma</span><span class="str-tool">Figma Make</span><span class="str-tool">Claude AI</span><span class="str-tool">Design Systems</span><span class="str-tool">Component Libraries</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="strategy-row">
+      <div class="strategy-row-head" onclick="toggleStrategy(this)">
+        <span class="strategy-row-num">04</span>
+        <span class="strategy-row-name">Test &amp; Validate</span>
+        <span class="strategy-row-tag">Usability · A/B</span>
+        <div class="strategy-row-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </div>
+      <div class="strategy-row-body">
+        <div class="strategy-row-inner">
+          <p>Design without testing is guesswork. I run moderated usability sessions and A/B tests against real tasks and KPIs — task success rate, time-on-task, drop-off rate — then feed findings directly back into the prototype in rapid cycles.</p>
+          <div class="strategy-row-tools"><span class="str-tool">Usability Testing</span><span class="str-tool">A/B Testing</span><span class="str-tool">Maze</span><span class="str-tool">Task Success Rate</span><span class="str-tool">Drop-off Analysis</span><span class="str-tool">Heatmaps</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="strategy-row">
+      <div class="strategy-row-head" onclick="toggleStrategy(this)">
+        <span class="strategy-row-num">05</span>
+        <span class="strategy-row-name">Deliver &amp; Measure</span>
+        <span class="strategy-row-tag">Handoff · KPIs</span>
+        <div class="strategy-row-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div>
+      </div>
+      <div class="strategy-row-body">
+        <div class="strategy-row-inner">
+          <p>I work closely with developers in Agile sprints to ensure pixel-perfect delivery — structured Zeplin/Figma handoff, annotated specs, and component documentation. Post-launch, I track KPIs to close the feedback loop and identify next improvements.</p>
+          <div class="strategy-row-tools"><span class="str-tool">Dev Handoff</span><span class="str-tool">Zeplin</span><span class="str-tool">Figma Specs</span><span class="str-tool">Agile Sprints</span><span class="str-tool">KPI Tracking</span><span class="str-tool">Jira</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CONTACT -->
-<div class="section-wrap full" id="contact" style="scroll-margin-top:60px">
-  <div class="inner">
-    <div class="contact-wrap">
-      <div class="contact-left">
-        <div class="section-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Say hello</span></div>
-        <h2>Let's work<br>together</h2>
-        <p>Have a project in mind or just want to talk design? I'm always open to new conversations.</p>
-        <a href="mailto:harinag12@gmail.com" class="contact-email">harinag12@gmail.com</a>
-        <div class="socials">
-          <a href="#" class="soc">Dribbble</a>
-          <a href="#" class="soc">Behance</a>
-          <a href="#" class="soc">LinkedIn</a>
-          <a href="#" class="soc">Instagram</a>
-        </div>
-      </div>
-      <div class="contact-form">
-        <div class="form-row">
-          <div class="field"><label>Name</label><input type="text" placeholder="Your name"></div>
-          <div class="field"><label>Email</label><input type="email" placeholder="you@email.com"></div>
-        </div>
-        <div class="field"><label>Subject</label><input type="text" placeholder="Project type or idea"></div>
-        <div class="field"><label>Message</label><textarea placeholder="Tell me about your project..."></textarea></div>
-        <button class="btn-submit" onclick="this.textContent='Sent ✓';this.style.background='#0D9488'">Send message</button>
-      </div>
+<section class="sec" id="contact">
+  <div class="contact-wrap">
+    <div>
+      <div class="sec-num">/ 05</div>
+      <h2 class="contact-h fu">Let's<br>Work<br><span class="em">Together</span></h2>
+    </div>
+    <div class="contact-r">
+      <p style="font-size:.78rem;color:var(--muted2);line-height:1.8;margin-bottom:.25rem">Open to senior UX roles, product design collaborations, and consulting. Based in Hyderabad — open to remote.</p>
+      <a class="c-link" href="mailto:harinag12@gmail.com">
+        <span class="c-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg></span>
+        harinag12@gmail.com
+      </a>
+      <a class="c-link" href="tel:+919989026762">
+        <span class="c-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+        (+91) 99890 26762
+      </a>
+      <a class="c-link" href="https://linkedin.com/in/harinagakumar" target="_blank">
+        <span class="c-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></span>
+        Hari Naga Kumar — LinkedIn
+      </a>
+      <a class="c-link" href="https://www.behance.net/harinag12f699" target="_blank">
+        <span class="c-ico"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M8 11h3m0 0c.667 0 2-.4 2-2s-1.333-2-2-2H6v8h5c1.333 0 2-.667 2-2s-1.333-2-2-2H8zm8-3h4m-4 4h4"/></svg></span>
+        Hari Nag — Behance Portfolio
+      </a>
+      <a class="btn-acc" href="mailto:harinag12@gmail.com">Start a Conversation <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
     </div>
   </div>
-</div>
+</section>
 
+<!-- FOOTER -->
 <footer>
-  <span class="footer-txt">© 2026 Hari Naga Kumar</span>
-  <span class="footer-txt">Designed with intention · Built with care</span>
+  <div class="foot-l">Hari Naga Kumar &middot; 2025</div>
+  <div class="foot-r">Lead UI/UX Designer &middot; Hyderabad, India</div>
 </footer>
 
-<!-- PROJECT DETAIL MODAL -->
+<!-- MODAL -->
 <div class="modal-overlay" id="projModal" onclick="closeModal(event)">
-  <div class="modal-box" id="projModalBox">
-    <button class="modal-close" onclick="closeModal(null,true)" aria-label="Close">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F1F35" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div class="modal-hero" id="mHero">
-      <span class="modal-badge">Case Study</span>
-      <div class="modal-hero-ico" id="mIco"></div>
-    </div>
-    <div class="modal-body">
-      <div class="modal-tags" id="mTags"></div>
-      <div class="modal-title" id="mTitle"></div>
-      <div class="modal-subtitle" id="mSub"></div>
-      <div class="modal-sections" id="mSections"></div>
-    </div>
-  </div>
+  <div class="modal-box" id="projModalBox"></div>
 </div>
 
 <script>
 (function(){
 
-  /* ── SVG ICONS ────────────────────────────────────────── */
-  function ico(path, s){ s=s||20; return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="none" stroke="#1B6CA8" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">'+path+'</svg>'; }
-  var ICON = {
-    brush:  ico('<path d="M9.06 11.9l8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1 1 2.18 1 3.5 1 2.77 0 5.02-2.25 5.02-5.02s-1.54-1.02-3.52-1.02z"/>'),
-    search: ico('<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>'),
-    tool:   ico('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'),
-    code:   ico('<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'),
-    chart:  ico('<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/>'),
-    users:  ico('<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>'),
-    pin:    ico('<path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>', 15),
-    brief:  ico('<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>', 15),
-    grad:   ico('<path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>', 15),
-    zap:    ico('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>', 15),
-  };
+/* CURSOR */
+var C=document.getElementById("C"),CR=document.getElementById("CR");
+var rx=0,ry=0,mx=0,my=0;
+document.addEventListener("mousemove",function(e){mx=e.clientX;my=e.clientY;C.style.left=mx+"px";C.style.top=my+"px"});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;CR.style.left=rx+"px";CR.style.top=ry+"px";requestAnimationFrame(loop)})();
+document.querySelectorAll("a,button,.proj-card,.sk,.tag-pill").forEach(function(el){
+  el.addEventListener("mouseenter",function(){C.classList.add("hov");CR.classList.add("hov")});
+  el.addEventListener("mouseleave",function(){C.classList.remove("hov");CR.classList.remove("hov")});
+});
 
-  /* ── HAMBURGER ────────────────────────────────────────── */
-  window.toggleMenu = function(){
-    var m = document.getElementById('mobile-menu');
-    var h = document.getElementById('hamburger');
-    var open = m.classList.toggle('open');
-    h.style.opacity = open ? '.6' : '1';
-  };
+/* FADE UP */
+var obs=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)e.target.classList.add("vis")})},{threshold:.1});
+document.querySelectorAll(".fu").forEach(function(el){obs.observe(el)});
 
-  /* ── SMOOTH NAV ───────────────────────────────────────── */
-  window.nav = function(id){
-    var el = document.getElementById(id);
-    if(!el) return;
-    var top = el.getBoundingClientRect().top + window.pageYOffset - 60;
-    window.scrollTo({top: top, behavior: 'smooth'});
-  };
+/* PROJECTS */
+var projs=[
+  {name:"AI Analytics Dashboard",caseStudyImage:"images/ai-saas-case-study.png",desc:"Led end-to-end UX for a data-driven financial dashboard, improving decision-making speed by ~30%.",tags:["Banking","SaaS","AI"],bg:"#0C1520",preview:"AI-powered analytics dashboard for banking — redesigned IA and navigation to reduce task completion time by 25%.",subtitle:"End-to-end UX design for a data-driven financial dashboard at BizAcuity Solutions, serving banking and SaaS clients who need fast, reliable decision-making tools.",problem:"Users struggled with complex data hierarchies and non-intuitive navigation, leading to high drop-off rates and poor task completion. Key KPIs were buried and stakeholder alignment was slow due to lack of interactive prototypes.",solution:"Redesigned information architecture and navigation based on user research and stakeholder interviews. Created interactive Figma prototypes that enabled faster sign-off. Applied A/B testing and usability testing to optimize critical workflows.",outcome:"Decision-making speed improved ~30%. Task completion time reduced 25%. Dashboard adoption increased significantly. Rework cycles reduced due to interactive prototype-driven stakeholder alignment.",tools:["Figma","Figma Make","Claude AI","GitHub Copilot","Jira","Adobe XD"],process:["User Research","KPI Mapping","IA Redesign","Wireframes","Prototype","A/B Testing"],metrics:[{val:"~30%",lbl:"Faster decisions"},{val:"25%",lbl:"Task time reduced"},{val:"40%",lbl:"Design inconsistencies cut"}]},
+  {name:"HealthOS Platform",caseStudyImage:"images/healthos-case-study.png",desc:"Simplified complex medical data into intuitive dashboards for clinicians and administrators.",tags:["Healthcare","Data Viz","Research"],bg:"#0B1C18",preview:"Health analytics platform transforming dense clinical data into role-based dashboards for clinicians and administrators.",subtitle:"UX design for a health analytics platform used by clinicians and administrators — making complex medical data navigable, actionable, and accessible.",problem:"Clinicians and administrators were overwhelmed by dense, poorly organised medical data. Existing interfaces lacked role-specific views, causing high cognitive load and slow task completion in high-stakes clinical scenarios.",solution:"Built user personas and journey maps aligned to real healthcare workflows. Simplified complex data into intuitive dashboards. Enhanced accessibility through improved typography and a clinical-grade colour system.",outcome:"Task success rate improved ~35%. Accessibility and readability significantly enhanced. Platform adopted across multiple clinical teams with positive usability testing scores.",tools:["Figma","Miro","Adobe Illustrator","Zeplin","Dovetail"],process:["Contextual Inquiry","Persona & Journey Map","IA Design","Wireframes","Hi-Fi Prototype","Usability Testing"],metrics:[{val:"~35%",lbl:"Task success rate"},{val:"WCAG",lbl:"Accessibility improved"},{val:"Multi-team",lbl:"Clinical adoption"}]},
+  {name:"Enterprise Dashboard",caseStudyImage:"images/datascope-case-study.png",desc:"High-performance dashboards for large datasets in finance and media — built at Gramener.",tags:["Finance","Media","Data Viz"],bg:"#0E0E20",preview:"Standardised design systems and data storytelling for enterprise finance and media dashboards serving large dataset volumes.",subtitle:"Designed high-performance dashboards for large datasets in finance and media domains at Gramener, enabling better stakeholder decisions through data storytelling.",problem:"Stakeholders struggled to extract actionable insights from large, complex datasets. Inconsistent design patterns and lack of reusable components created significant design debt and slow delivery cycles.",solution:"Standardised design systems with reusable components, reducing design debt by ~40%. Improved data comprehension through visual storytelling. Conducted usability testing to identify and resolve friction points.",outcome:"Stakeholder decision-making significantly improved. Design debt reduced ~40%. Key friction points resolved through iterative usability testing cycles.",tools:["Figma","Adobe Illustrator","D3.js (design spec)","Sketch","Google Stitch"],process:["Stakeholder Workshops","Data Taxonomy","Component System","Dashboard Design","Prototype","Usability Testing"],metrics:[{val:"~40%",lbl:"Design debt reduced"},{val:"7 yrs",lbl:"At Gramener"},{val:"Finance + Media",lbl:"Domains"}]},
+  {name:"AI Workflow Integration",caseStudyImage:"images/finflow-case-study.png",desc:"Integrated AI tools into design workflows — reducing iteration time by ~25%.",tags:["AI","Workflow","Productivity"],bg:"#141E14",preview:"Systematically integrating Figma Make, Claude AI, and Google Stitch into UX design workflows for faster prototyping and handoff.",subtitle:"Integrated AI tools — Figma Make, Claude AI, and Google Stitch — into design workflows at BizAcuity, transforming prototyping, wireframing, and design-to-dev handoff.",problem:"Design iteration cycles were slow and manual. Wireframing and UI exploration required significant effort, and design-to-development handoff was inconsistent, causing rework and delays.",solution:"Implemented AI-assisted workflows using Figma Make for rapid component generation, Claude AI for content and UX copy, and Google Stitch for structured documentation. Automated wireframing and UI exploration stages.",outcome:"Design iteration time reduced ~25%. Productivity and consistency improved across the team. Faster design-to-development handoff through structured components and AI-generated documentation.",tools:["Figma Make","Claude AI","Google Stitch","GitHub Copilot","Figma","Jira"],process:["Workflow Audit","Tool Selection","Pilot Testing","Team Rollout","Iteration","Documentation"],metrics:[{val:"~25%",lbl:"Iteration time saved"},{val:"Faster",lbl:"Dev handoff"},{val:"Consistent",lbl:"Output quality"}]},
+  {name:"E-learning Platform UX",caseStudyImage:"images/elearning-case-study.png",desc:"Interactive learning interfaces with improved engagement, retention, and content hierarchy.",tags:["E-learning","UI","Animation"],bg:"#1E1408",preview:"Designing interactive learning interfaces and content structures with micro-interactions and animations to enhance learning experience.",subtitle:"UX design for interactive e-learning interfaces — improving engagement, retention, and navigability through better content hierarchy and micro-interactions.",problem:"Learners disengaged quickly due to flat, text-heavy interfaces with poor navigation. Content hierarchy was unclear, making it hard for users to locate and progress through learning modules.",solution:"Designed interactive learning interfaces with clear content hierarchy and improved navigation flows. Created animations and micro-interactions to enhance learning experience and signal progress.",outcome:"User engagement and retention significantly improved. Navigation clarity enhanced through better content hierarchy. Micro-interactions and animations positively received in usability reviews.",tools:["Adobe Illustrator","Adobe After Effects","Articulate Storyline","Figma","Adobe XD"],process:["Content Audit","UX Flows","Wireframes","Visual Design","Animation","QA & Publish"],metrics:[{val:"Better",lbl:"Engagement"},{val:"Clearer",lbl:"Content hierarchy"},{val:"Micro-IxD",lbl:"Added across flows"}]},
+  {name:"Brand & Motion Work",caseStudyImage:"images/brand-case-study.png",desc:"Logos, animations, and visual identities across LOGICPROG, Caliber IT, and Rush Softech.",tags:["Branding","Animation","Identity"],bg:"#1C0A0A",preview:"Brand identity systems, logo design, marketing visuals, and animated e-learning content across three technology companies.",subtitle:"Brand identity and motion design work across LOGICPROG Technologies, Caliber IT Solutions, and Rush Softech — spanning logos, websites, marketing visuals, and animated e-learning content.",problem:"Growing technology companies lacked cohesive brand identities. Marketing materials were inconsistent, and e-learning content was static and unengaging — undermining credibility with enterprise clients and learners.",solution:"Designed logo systems, websites, and marketing visuals for digital products. Created interactive animations and educational content for engineering platforms. Established brand guidelines used consistently across channels.",outcome:"Consistent brand presence established across all three companies. Interactive e-learning content improved learner engagement. Foundation built for further brand and digital product work.",tools:["Adobe Illustrator","Adobe After Effects","Adobe Photoshop","Adobe InDesign","Figma"],process:["Brand Discovery","Logo Design","Visual System","Web Design","Animation","Delivery"],metrics:[{val:"3",lbl:"Companies branded"},{val:"E-learning",lbl:"Content animated"},{val:"2009–2014",lbl:"Career foundation"}]},
+];
 
+var icos=["◈","✦","◎","▣","◉","◆"];
+var grid=document.getElementById("projGrid");
+projs.forEach(function(p,i){
+  var tags=p.tags.map(function(t){return'<span class="ptag">'+t+"</span>"}).join("");
+  var card=document.createElement("div");
+  card.className="proj-card fu";
+  card.innerHTML=
+    '<div class="proj-l">'
+      +'<div class="proj-num">'+String(i+1).padStart(2,"0")+" / "+String(projs.length).padStart(2,"0")+"</div>"
+      +'<div class="proj-name">'+p.name+"</div>"
+      +'<p class="proj-blurb">'+p.desc+"</p>"
+      +'<div class="proj-tags-row">'+tags+"</div>"
+    +"</div>"
+    +'<div class="proj-r" style="background:'+p.bg+'">'
+      +'<div class="proj-ico-bg">'+icos[i]+"</div>"
+      +"<div>"
+        +'<div class="proj-r-caption">Case Study</div>'
+        +'<div class="proj-r-preview">'+p.preview+"</div>"
+      +"</div>"
+      +'<div class="proj-cta-txt">View Case Study <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></div>'
+    +"</div>";
+  card.addEventListener("click",function(){openModal(i)});
+  grid.appendChild(card);
+  obs.observe(card);
+});
 
+/* MODAL */
+var zoom=1;
+window.openModal=function(i){
+  var p=projs[i];
+  var ov=document.getElementById("projModal");
+  var box=document.getElementById("projModalBox");
+  box.scrollTop=0;zoom=1;
+  if(p.caseStudyImage){
+    var tags=p.tags.map(function(t){return'<span class="modal-tag">'+t+"</span>"}).join("");
+    box.innerHTML=
+      '<div class="modal-img-header">'
+        +'<div><div class="modal-img-title">'+p.name+'</div><div class="modal-img-sub">Case Study</div></div>'
+        +'<div style="display:flex;align-items:center;gap:.65rem">'
+          +'<div class="modal-img-tags">'+tags+"</div>"
+          +'<div class="modal-img-zoom">'
+            +'<button class="modal-zoom-btn" onclick="adjustZoom(-0.2)">&#8722;</button>'
+            +'<span id="ZL" style="font-size:.65rem;font-family:\'DM Mono\',monospace;color:var(--muted2);min-width:2.4rem;text-align:center">100%</span>'
+            +'<button class="modal-zoom-btn" onclick="adjustZoom(0.2)">+</button>'
+          +"</div>"
+          +'<button class="modal-close" onclick="closeModal(null,true)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--white)" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>'
+        +"</div>"
+      +"</div>"
+      +'<div class="modal-img-wrap"><img id="CI" src="'+p.caseStudyImage+'" alt="'+p.name+'" style="transform-origin:top center;transition:transform .2s"></div>';
+  } else {
+    var tags2=p.tags.map(function(t){return'<span class="modal-tag">'+t+"</span>"}).join("");
+    var met=p.metrics.map(function(m){return'<div class="modal-metric-card"><div class="modal-metric-val">'+m.val+'</div><div class="modal-metric-lbl">'+m.lbl+"</div></div>"}).join("");
+    var steps=p.process.map(function(s,j){return'<div class="process-step"><div class="process-step-num">0'+(j+1)+'</div><div class="process-step-name">'+s+"</div></div>"}).join("");
+    var tools=p.tools.map(function(t){return'<span class="modal-tool-pill">'+t+"</span>"}).join("");
+    box.innerHTML=
+      '<button class="modal-close" style="position:absolute;top:1rem;right:1rem" onclick="closeModal(null,true)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--white)" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>'
+      +'<div class="modal-hero" style="background:'+p.bg+'"><span class="modal-badge">Case Study</span></div>'
+      +'<div class="modal-body">'
+        +'<div class="modal-tags">'+tags2+"</div>"
+        +'<div class="modal-title">'+p.name+"</div>"
+        +'<div class="modal-subtitle">'+p.subtitle+"</div>"
+        +'<div class="modal-sections">'
+          +'<div class="modal-metrics">'+met+"</div>"
+          +'<div><div class="modal-section-title">The Problem</div><div class="modal-section-body">'+p.problem+"</div></div>"
+          +'<div><div class="modal-section-title">The Solution</div><div class="modal-section-body">'+p.solution+"</div></div>"
+          +'<div class="modal-process"><div class="modal-section-title">Design Process</div><div class="process-steps">'+steps+"</div></div>"
+          +'<div class="modal-tools"><div class="modal-section-title">Tools</div><div class="modal-tool-pills">'+tools+"</div></div>"
+          +'<div style="grid-column:1/-1"><div class="modal-section-title">Outcomes</div><div class="modal-section-body">'+p.outcome+"</div></div>"
+        +"</div>"
+      +"</div>";
+  }
+  ov.classList.add("open");
+  document.body.style.overflow="hidden";
+};
+window.adjustZoom=function(d){
+  zoom=Math.min(2.5,Math.max(0.4,zoom+d));
+  var img=document.getElementById("CI"),lbl=document.getElementById("ZL");
+  if(img)img.style.transform="scale("+zoom+")";
+  if(lbl)lbl.textContent=Math.round(zoom*100)+"%";
+};
+window.closeModal=function(e,f){
+  if(f||(e&&e.target===document.getElementById("projModal"))){
+    document.getElementById("projModal").classList.remove("open");
+    document.body.style.overflow="";
+  }
+};
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal(null,true)});
 
-  /* ── ABOUT FACTS ──────────────────────────────────────── */
-  var facts = [
-    {icon:'pin',  txt:'Hyderabad, India'},
-    {icon:'brief',txt:'Bizacuity Solutions'},
-    {icon:'grad', txt:'BFA · Osmania University'},
-    {icon:'zap',  txt:'UCD / HCD · Agile'},
-  ];
-  var factsEl = document.getElementById('aboutFacts');
-  facts.forEach(function(f){
-    factsEl.innerHTML += '<div class="fact-item">'+ICON[f.icon]+'<span class="fact-txt">'+f.txt+'</span></div>';
-  });
+/* PROCESS ACCORDION */
+window.toggleStrategy=function(head){
+  var isActive=head.classList.contains("active");
+  document.querySelectorAll(".strategy-row-head").forEach(function(h){h.classList.remove("active");h.nextElementSibling.classList.remove("open")});
+  if(!isActive){head.classList.add("active");head.nextElementSibling.classList.add("open")}
+};
+(function(){var first=document.querySelector(".strategy-row-head");if(first){first.classList.add("active");first.nextElementSibling.classList.add("open")}})();
 
-  /* ── EXPERIENCE ───────────────────────────────────────── */
-  var expData = [
-    {role:'Lead UI UX Designer', company:'Bizacuity Solutions Pvt Ltd', loc:'Hyderabad', period:'Sep 2023 – Present', desc:'Proven track record in banking, healthcare, and AI SaaS platforms, focused on usability and performance.'},
-    {role:'Lead UX Engineer',    company:'Gramener',                    loc:'Hyderabad', period:'Jun 2016 – Sep 2023', desc:'Specialising in data visualisation and dashboard design for finance, healthcare, and media platforms. (7 years)'},
-    {role:'UI Designer',         company:'Sai Sri Technologies',        loc:'Hyderabad', period:'Sep 2014 – Jun 2016', desc:'Designed and delivered visual content across e-learning, product illustration, branding, and web design.'},
-    {role:'Graphic Designer & Animator', company:'LOGICPROG Technologies', loc:'Hyderabad', period:'Aug 2013 – Aug 2014', desc:'Developed graphics, animations and visual images for product illustrations, logos, and websites.'},
-    {role:'Graphic Designer & Animator', company:'Caliber IT Solutions',   loc:'Hyderabad', period:'Jan 2010 – Aug 2013', desc:'Developed graphics and visual images for product illustrations, logos, and websites.'},
-    {role:'Graphic Designer',    company:'Rush Softech Pvt Ltd',        loc:'Hyderabad', period:'Jun 2009 – Dec 2009', desc:'Developed graphics and visual images for product illustrations, logos, and websites. (formerly BNR IT Solutions)'},
-  ];
-  var tlEl = document.getElementById('timeline');
-  expData.forEach(function(e){
-    tlEl.innerHTML += '<div class="exp-item">'
-      +'<div class="exp-meta"><div class="exp-period">'+e.period+'</div><div class="exp-company">'+e.company+' · '+e.loc+'</div></div>'
-      +'<div class="exp-stepper"><div class="exp-dot"></div></div>'
-      +'<div class="exp-card-clean">'
-      +'<div class="exp-role">'+e.role+'</div>'
-      +'<div class="exp-company-mob" style="font-size:.82rem;color:var(--accent);font-weight:600;margin-bottom:.35rem">'+e.company+'</div>'
-      +'<div class="exp-desc">'+e.desc+'</div>'
-      +'</div>'
-      +'</div>';
-  });
-
-  /* ── EDUCATION ────────────────────────────────────────── */
-  var eduData = [
-    {num:'01', degree:'Bachelor of Fine Arts (BFA)',      inst:'Osmania University', loc:'Hyderabad'},
-    {num:'02', degree:'Diploma in Computer Engineering',  inst:'Andhra University',  loc:'Andhra Pradesh'},
-    {num:'03', degree:'Intermediate',                     inst:'Govt. Jr. College',  loc:'Razole'},
-  ];
-  var eduEl = document.getElementById('eduGrid');
-  eduData.forEach(function(e){
-    eduEl.innerHTML += '<div class="edu-card">'
-      +'<div class="edu-num">'+e.num+'</div>'
-      +'<div class="edu-deg">'+e.degree+'</div>'
-      +'<div class="edu-inst">'+e.inst+'</div>'
-      +'<div class="edu-loc">'+e.loc+'</div>'
-      +'</div>';
-  });
-
-  /* ── SKILLS ───────────────────────────────────────────── */
-  var skillData = [
-    {icon:'brush', cat:'UI Design',    skills:['Visual Design','Color Theory','Typography','Design Systems','Component Libraries','Responsive Design','Adaptive Design','Data Viz Design','Micro-interactions','Animation']},
-    {icon:'search',cat:'Core UX',     skills:['User Research','Interviews & Surveys','User Personas','Journey Mapping','Info Architecture','Wireframing','Prototyping','Interaction Design','Design Thinking']},
-    {icon:'tool',  cat:'Tools',        skills:['Figma','Figma Make','Google Stitch','Sketch','Adobe Photoshop','Adobe Illustrator','Adobe XD','Visual Studio','GitHub Copilot','Claude AI']},
-    {icon:'code',  cat:'Technical',    skills:['HTML & CSS','Responsive Frameworks','Front-end Feasibility','SaaS Workflows']},
-    {icon:'chart', cat:'Analytical',   skills:['Data-driven Design','KPI-driven UX','A/B Testing','Product Lifecycle']},
-    {icon:'users', cat:'Soft Skills',  skills:['Stakeholder Collab','Storytelling','Attention to Detail','Project Management']},
-  ];
-  var skillEl = document.getElementById('skillGrid');
-  skillData.forEach(function(c){
-    var items = c.skills.map(function(s){ return '<li>'+s+'</li>'; }).join('');
-    skillEl.innerHTML += '<div class="skill-col">'
-      +'<div class="skill-col-head">'
-      +'<div class="skill-ico-box">'+ICON[c.icon]+'</div>'
-      +'<div class="skill-col-name">'+c.cat+'</div>'
-      +'<div class="skill-divider"></div>'
-      +'</div>'
-      +'<ul class="skill-items">'+items+'</ul>'
-      +'</div>';
-  });
-
-  /* ── PROJECTS ─────────────────────────────────────────── */
-  var projIcons = ['chart','search','tool','brush','code','users'];
-  var projects = [
-    {
-      name:'HR Analytics',
-      caseStudyImage:'images/finflow-case-study.png',
-      desc:'Transforming fragmented HR analytics into actionable insights through data-driven design',
-      tags:['Recruitment','UX','HR'],
-      bg:'#DCEEFB',
-      subtitle:'A comprehensive redesign of a legacy banking dashboard for a mid-sized financial institution, focusing on accessibility, cognitive load reduction, and task efficiency for daily banking operations staff.',
-      problem:'The existing dashboard had a 14-step average task flow for common operations, WCAG AA accessibility failures, and a 62% user-reported confusion rate in usability testing — causing measurable losses in operational throughput.',
-      solution:'Restructured the information architecture around job-to-be-done flows rather than system modules. Introduced a progressive disclosure model, unified component library, and an accessible colour system meeting WCAG AA across all contrast ratios.',
-      outcome:'Task completion time dropped 38%. Error rate fell by 51%. User satisfaction scores rose from 3.1 to 4.6 / 5 in post-launch surveys. Accessibility audit score improved from 61 to 97.',
-      tools:['Figma','FigJam','Axure RP','Maze (usability testing)','Jira','Zeroheight (design system docs)'],
-      process:['Discovery','Research','IA & Flows','Wireframes','Prototype','Test & Iterate'],
-      metrics:[{val:'38%',lbl:'Faster task completion'},{val:'51%',lbl:'Error rate reduction'},{val:'4.6/5',lbl:'User satisfaction'}],
-    },
-    {
-      name:'HealthOS Platform',
-      caseStudyImage:'images/healthos-case-study.png',
-      desc:'End-to-end UX for a healthcare SaaS — complex workflows simplified for clinical users.',
-      tags:['Healthcare','OPD','SaaS'],
-      bg:'#D8F0EC',
-      subtitle:'End-to-end UX design for a healthcare SaaS serving clinical administrators, nurses, and doctors — transforming dense, regulation-heavy workflows into clear, role-specific interfaces that reduce cognitive load during high-stakes scenarios.',
-      problem:'Clinical staff were toggling between 5+ legacy systems for a single patient workflow. The cognitive overload contributed to data entry errors and regulatory compliance risks. The product needed a unified platform with clearly delineated role access.',
-      solution:'Conducted 18 contextual interviews across 3 hospitals. Defined distinct user personas (doctor, nurse, admin). Designed a modular role-based dashboard with contextual prompts, inline help, and a streamlined patient-record workflow reducing the average touchpoints from 22 to 8.',
-      outcome:'Onboarding time for new clinical staff reduced by 44%. Data entry errors fell by 33% in a 3-month pilot. The platform received clearance in regulatory audit with zero UX-related compliance flags.',
-      tools:['Figma','Miro','Dovetail (research synthesis)','Principle (micro-interactions)','Zeplin','Adobe Illustrator'],
-      process:['Contextual Inquiry','Persona Mapping','Journey Map','System Design','Prototype','Pilot & Refine'],
-      metrics:[{val:'44%',lbl:'Faster staff onboarding'},{val:'33%',lbl:'Fewer data entry errors'},{val:'22→8',lbl:'Workflow touchpoints'}],
-    },
-    {
-      name:'Project Management',
-      caseStudyImage:'images/datascope-case-study.png',
-      desc:'Designing a scalable, data-driven dashboard for workforce, project, and resource management',
-      tags:['Data Viz','Dashboard','HR'],
-      bg:'#E8E4F8',
-      subtitle:'A real-time data visualisation platform for media intelligence and financial performance monitoring — designed for analysts and C-suite stakeholders who need to make fast decisions from complex, multi-source data streams.',
-      problem:'Analyst teams were spending 3–4 hours daily manually compiling data from disparate sources into PowerPoint reports. Stakeholders lacked live visibility into KPIs, and the existing BI tool was too complex for non-technical executives.',
-      solution:'Designed a two-layer dashboard: a high-level executive view with key KPIs, trend indicators, and anomaly flags; and a deep-dive analyst layer with filterable charts, drill-down tables, and export tools. Used Gramener\'s Gramex framework and D3.js-backed components.',
-      outcome:'Report compilation time reduced from 3–4 hours to under 10 minutes. Executive adoption reached 87% within 6 weeks of launch. Platform shortlisted for a data visualisation industry award.',
-      tools:['Figma','D3.js (design spec)','Tableau (reference)','Adobe Illustrator','Gramex','Excel (data modelling)'],
-      process:['Stakeholder Workshops','KPI Mapping','Chart Taxonomy','Layout Design','Prototype','QA & Launch'],
-      metrics:[{val:'95%',lbl:'Report time saved'},{val:'87%',lbl:'Executive adoption'},{val:'6 wks',lbl:'To full deployment'}],
-    },
-    {
-      name:'AI SaaS Interface',
-      caseStudyImage:'images/ai-saas-case-study.png',
-      desc:'Enable structured project starts by auto-generating key artifacts from minimal inputs,
-      tags:['AI','Product','UX'],
-      bg:'#DCEEFB',
-      subtitle:'UI/UX design for an AI-powered SaaS product at Bizacuity Solutions — a platform where non-technical users configure, run, and monitor AI pipelines. The challenge: making complex AI behaviour feel approachable and controllable.',
-      problem:'Early user testing showed that non-technical users found the AI configuration screens intimidating, with abstract terminology and a lack of real-time feedback causing abandonment. Technical users, conversely, needed deeper control without extra clicks.',
-      solution:'Introduced a "simple vs advanced" mode toggle on AI config screens. Rewrote all microcopy and labels in plain language. Built a live preview panel so users could see the effect of settings in real time. Designed a status system with clear progress states, confidence indicators, and plain-language error messages.',
-      outcome:'Feature adoption among non-technical users increased by 60%. Support tickets related to AI configuration dropped by 42%. Time-to-first-successful-run reduced from 18 minutes to 6 minutes.',
-      tools:['Figma','Figma Make','Claude AI (design ideation)','GitHub Copilot','Visual Studio Code','Lottie (animations)'],
-      process:['User Interviews','Mental Model Mapping','Content Strategy','UI Design','Prototype','A/B Testing'],
-      metrics:[{val:'60%',lbl:'Feature adoption up'},{val:'42%',lbl:'Fewer support tickets'},{val:'18→6 min',lbl:'Time to first success'}],
-    },
-    {
-      name:'E-learning Portal',
-      caseStudyImage:'images/elearning-case-study.png',
-      desc:'Visual content and UX for an e-learning platform — delivered at Sai Sri Technologies.',
-      tags:['E-learning','Branding','Illustration'],
-      bg:'#FDF5E0',
-      subtitle:'End-to-end visual design and UX for a corporate e-learning platform serving 12,000+ employees at a large enterprise client — covering course interface design, illustration systems, motion graphics, and brand identity for the learning product.',
-      problem:'The client\'s existing e-learning content used stock photography and off-the-shelf templates, resulting in low learner engagement (avg. 34% course completion). The brand felt disconnected from the company\'s identity, reducing perceived credibility.',
-      solution:'Developed a bespoke illustration library of 200+ scenes tailored to the client\'s industry. Designed a consistent course UI with clear progress mechanics, chunked content cards, and animated transitions. Rebuilt the visual brand system for the learning platform from scratch.',
-      outcome:'Course completion rate rose from 34% to 71% across the first 3 cohorts. Learner satisfaction scores averaged 4.4 / 5. The illustration library was reused across 40+ courses, reducing production time per course by 55%.',
-      tools:['Adobe Illustrator','Adobe Photoshop','Adobe After Effects','Articulate Storyline','Figma','Adobe XD'],
-      process:['Brand Audit','Illustration System','UI Patterns','Motion Design','Authoring','QA & Publish'],
-      metrics:[{val:'71%',lbl:'Course completion rate'},{val:'55%',lbl:'Production time saved'},{val:'4.4/5',lbl:'Learner satisfaction'}],
-    },
-    {
-      name:'Brand & Motion Work',
-      caseStudyImage:'images/brand-case-study.png',
-      desc:'Logos, animations, and visual identities across LOGICPROG and Caliber IT.',
-      tags:['Branding','Animation','Identity'],
-      bg:'#FDEAEA',
-      subtitle:'A portfolio of brand identity and motion design work spanning 4+ years across LOGICPROG Technologies and Caliber IT Solutions — covering logo design, brand guidelines, animated explainers, UI illustrations, and product marketing visuals.',
-      problem:'Both companies were growing rapidly but lacked cohesive brand identities. Marketing materials were inconsistent across channels, and product illustrations relied on generic clip-art — undermining professional credibility with enterprise clients.',
-      solution:'Designed complete brand identity systems for both companies including logo, colour palette, typography, icon libraries, and usage guidelines. Produced 30+ animated explainer sequences in After Effects. Created modular illustration systems reused across web, presentations, and print.',
-      outcome:'Both companies reported increased win rates in enterprise pitches. LOGICPROG\'s rebrand was credited in winning a $400k contract. Caliber IT reduced external design agency spend by 70% using internal brand assets.',
-      tools:['Adobe Illustrator','Adobe After Effects','Adobe Photoshop','Adobe InDesign','Figma','Cinema 4D (basic)'],
-      process:['Brand Discovery','Concept Sketches','Logo Design','System Design','Motion Design','Brand Rollout'],
-      metrics:[{val:'30+',lbl:'Animation sequences'},{val:'70%',lbl:'Agency spend saved'},{val:'2',lbl:'Full brand systems built'}],
-    },
-  ];
-  var projEl = document.getElementById('projGrid');
-  projects.forEach(function(p, i){
-    var tags = p.tags.map(function(t){ return '<span class="proj-tag">'+t+'</span>'; }).join('');
-    var card = document.createElement('div');
-    card.className = 'proj-card';
-    card.innerHTML = '<div class="proj-thumb" style="background:'+p.bg+'">'
-      +'<div class="proj-ico-wrap">'+ICON[projIcons[i]].replace('width="20" height="20"','width="28" height="28"')+'</div>'
-      +'<span class="proj-thumb-label">Case Study</span>'
-      +'</div>'
-      +'<div class="proj-body">'
-      +'<div class="proj-tags">'+tags+'</div>'
-      +'<div class="proj-name">'+p.name+'</div>'
-      +'<p class="proj-desc">'+p.desc+'</p>'
-      +'<div style="margin-top:.9rem;font-size:.72rem;font-weight:600;color:var(--accent);letter-spacing:.04em;display:flex;align-items:center;gap:.3rem">View case study <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>'
-      +'</div>';
-    card.addEventListener('click', function(){ openModal(i); });
-    projEl.appendChild(card);
-  });
-
-  /* ── MODAL ────────────────────────────────────────────── */
-  var imgZoom = 1;
-
-  window.openModal = function(i){
-    var p = projects[i];
-    var overlay = document.getElementById('projModal');
-    var box = document.getElementById('projModalBox');
-    box.scrollTop = 0;
-    imgZoom = 1;
-
-    if(p.caseStudyImage){
-      /* ── IMAGE MODE ── */
-      box.classList.add('img-mode');
-      var tags = p.tags.map(function(t){ return '<span class="modal-tag">'+t+'</span>'; }).join('');
-      box.innerHTML =
-        '<button class="modal-close" onclick="closeModal(null,true)" aria-label="Close">'
-          +'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F1F35" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
-        +'</button>'
-        +'<div class="modal-img-header">'
-          +'<div class="modal-img-meta">'
-            +'<div class="modal-img-title">'+p.name+'</div>'
-            +'<div class="modal-img-sub">Case Study</div>'
-          +'</div>'
-          +'<div style="display:flex;align-items:center;gap:.75rem">'
-            +'<div class="modal-img-tags">'+tags+'</div>'
-            +'<div class="modal-img-zoom">'
-              +'<button class="modal-zoom-btn" onclick="adjustZoom(-0.2)">−</button>'
-              +'<span id="zoomLbl" style="font-size:.72rem;font-weight:600;color:var(--txt3);min-width:2.5rem;text-align:center">100%</span>'
-              +'<button class="modal-zoom-btn" onclick="adjustZoom(0.2)">+</button>'
-            +'</div>'
-          +'</div>'
-        +'</div>'
-        +'<div class="modal-img-wrap" id="imgWrap">'
-          +'<img id="caseImg" src="'+p.caseStudyImage+'" alt="'+p.name+' case study" style="transform-origin:top center;transition:transform .2s">'
-        +'</div>';
-    } else {
-      /* ── TEXT MODE ── */
-      box.classList.remove('img-mode');
-      box.innerHTML =
-        '<button class="modal-close" onclick="closeModal(null,true)" aria-label="Close">'
-          +'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#0F1F35" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>'
-        +'</button>'
-        +'<div class="modal-hero" id="mHero" style="background:'+p.bg+'">'
-          +'<span class="modal-badge">Case Study</span>'
-          +'<div class="modal-hero-ico">'+ICON[projIcons[i]].replace('width="20" height="20"','width="36" height="36"')+'</div>'
-        +'</div>'
-        +'<div class="modal-body">'
-          +'<div class="modal-tags">'+p.tags.map(function(t){ return '<span class="modal-tag">'+t+'</span>'; }).join('')+'</div>'
-          +'<div class="modal-title">'+p.name+'</div>'
-          +'<div class="modal-subtitle">'+p.subtitle+'</div>'
-          +'<div class="modal-sections" id="mSections"></div>'
-        +'</div>';
-
-      var metrics = p.metrics.map(function(m){
-        return '<div class="modal-metric-card"><div class="modal-metric-val">'+m.val+'</div><div class="modal-metric-lbl">'+m.lbl+'</div></div>';
-      }).join('');
-      var processSteps = p.process.map(function(s, idx){
-        return '<div class="process-step"><div class="process-step-num">0'+(idx+1)+'</div><div class="process-step-name">'+s+'</div></div>';
-      }).join('');
-      var tools = p.tools.map(function(t){ return '<span class="modal-tool-pill">'+t+'</span>'; }).join('');
-
-      document.getElementById('mSections').innerHTML =
-        '<div class="modal-metrics">'+metrics+'</div>'
-        +'<div><div class="modal-section-title">The Problem</div><div class="modal-section-body">'+p.problem+'</div></div>'
-        +'<div><div class="modal-section-title">The Solution</div><div class="modal-section-body">'+p.solution+'</div></div>'
-        +'<div class="modal-process"><div class="modal-section-title">Design Process</div><div class="process-steps">'+processSteps+'</div></div>'
-        +'<div class="modal-tools"><div class="modal-section-title">Tools & Methods</div><div class="modal-tool-pills">'+tools+'</div></div>'
-        +'<div style="grid-column:1/-1"><div class="modal-section-title">Outcomes</div><div class="modal-section-body">'+p.outcome+'</div></div>';
-    }
-
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  };
-
-  window.adjustZoom = function(delta){
-    imgZoom = Math.min(2, Math.max(0.4, imgZoom + delta));
-    var img = document.getElementById('caseImg');
-    var lbl = document.getElementById('zoomLbl');
-    if(img) img.style.transform = 'scale('+imgZoom+')';
-    if(lbl) lbl.textContent = Math.round(imgZoom*100)+'%';
-  };
-
-  window.closeModal = function(e, force){
-    if(force || (e && e.target === document.getElementById('projModal'))){
-      document.getElementById('projModal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-  };
-
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape') closeModal(null, true);
-  });
+/* NAV SCROLL */
+var navEl=document.querySelector("nav");
+window.addEventListener("scroll",function(){navEl.classList.toggle("scrolled",window.scrollY>60)},{passive:true});
 
 })();
 </script>
